@@ -748,7 +748,7 @@ section.dark{scroll-margin-top:calc(112px - clamp(130px,14vw,190px) + env(safe-a
 /* ---------- dark bands ---------- */
 section.dark{color:var(--ink);padding-block:clamp(130px,14vw,190px)!important;position:relative}
 /* whole-page night mode: a fixed navy layer fades in while a dark section holds the middle of the screen */
-.night{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:0;transition:opacity .9s cubic-bezier(.45,0,.2,1);background:radial-gradient(900px 600px at 85% 15%,rgba(123,92,255,.25),transparent 70%),radial-gradient(700px 500px at 10% 90%,rgba(237,191,7,.10),transparent 70%),#0d1030}
+.night{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:0;transition:opacity .9s cubic-bezier(.45,0,.2,1);background:radial-gradient(1200px 520px at 50% -10%,rgba(120,130,255,.14),transparent 70%),#0d1030}
 body.is-night .night{opacity:1}
 /* night mode applies to every section on screen, so neighbouring titles never sink into the navy */
 main :is(.h2,.subh h3,.lead,.note,.eyebrow,.tt b,.tt .n,.tt p,.tl5 b,.tl5 span,.tl5 .n,.vstate,.vis .lead){transition:color .9s cubic-bezier(.45,0,.2,1)}
@@ -796,7 +796,6 @@ section.dark.lit .glass{background:rgba(255,255,255,.96);box-shadow:0 30px 70px 
 
 
 /* ===== VARIANT A: keep the night crossfade, add KAP-style depth ===== */
-.night .stars{position:absolute;inset:0;width:100%;height:100%;opacity:.9}
 section.dark{padding-block:clamp(200px,20vw,260px)!important}
 section.dark{scroll-margin-top:calc(112px - clamp(200px,20vw,260px) + env(safe-area-inset-top,0px))!important}
 /* content arrives after the scene has changed */
@@ -1499,32 +1498,14 @@ welcome();
  t.onclick=()=>{scrollTo({top:0,behavior:RM?'auto':'smooth'});$('#nav .logo').focus({preventScroll:true})}}
 
 
-
-/* ---------- star / network field (shared) ---------- */
-window.kfiStars=function(host,opt){opt=opt||{};const RMs=matchMedia('(prefers-reduced-motion: reduce)').matches;
- const cv=document.createElement('canvas');cv.className='stars';cv.setAttribute('aria-hidden','true');host.prepend(cv);const cx=cv.getContext('2d');
- let W=0,H=0,P=[],vis=true,raf=0;const N=()=>Math.round(Math.min(160,(W*H)/9000));
- function size(){const r=cv.getBoundingClientRect(),d=Math.min(devicePixelRatio||1,2);W=r.width;H=r.height;cv.width=W*d;cv.height=H*d;cx.setTransform(d,0,0,d,0,0);
-  P=Array.from({length:N()},()=>({x:Math.random()*W,y:Math.random()*H,r:Math.random()*1.3+.3,v:(Math.random()*.12+.03),tw:Math.random()*6.28,g:Math.random()<.12}))}
- function draw(t){cx.clearRect(0,0,W,H);
-  for(let i=0;i<P.length;i++){const a=P[i];if(!RMs){a.y-=a.v;if(a.y<-4){a.y=H+4;a.x=Math.random()*W}}
-   const al=.35+.45*Math.sin(t/1400+a.tw)**2;cx.fillStyle=a.g?`rgba(237,191,7,${al})`:`rgba(220,226,255,${al})`;cx.beginPath();cx.arc(a.x,a.y,a.r,0,6.283);cx.fill();
-   for(let j=i+1;j<P.length&&j<i+12;j++){const b=P[j],dx=a.x-b.x,dy=a.y-b.y,d=dx*dx+dy*dy;if(d<8000){cx.strokeStyle=`rgba(150,165,255,${.10*(1-d/8000)})`;cx.lineWidth=.6;cx.beginPath();cx.moveTo(a.x,a.y);cx.lineTo(b.x,b.y);cx.stroke()}}}
-  if(!RMs&&vis)raf=requestAnimationFrame(draw)}
- size();addEventListener('resize',()=>{clearTimeout(size.t);size.t=setTimeout(()=>{size();if(RMs)draw(0)},150)});
- const target=opt.watch||host;
- if('IntersectionObserver' in window&&!opt.always)new IntersectionObserver(es=>{vis=es[0].isIntersecting;cancelAnimationFrame(raf);if(vis)raf=requestAnimationFrame(draw)}).observe(target);
- if(RMs)draw(0);else raf=requestAnimationFrame(draw);
- return{setVisible(v){vis=v;cancelAnimationFrame(raf);if(v&&!RMs)raf=requestAnimationFrame(draw)}}};
-
 /* ---------- night mode while dark sections are in view ---------- */
 {const ds=[...document.querySelectorAll('section.dark')];const nt=document.createElement('div');nt.className='night';nt.setAttribute('aria-hidden','true');
- document.querySelector('.aurora').after(nt);let on=null;const sf=window.kfiStars(nt,{always:true});sf.setVisible(false);
+ document.querySelector('.aurora').after(nt);let on=null;
  const up=()=>{const vh=innerHeight;let hit=null;
   ds.forEach(sec=>{const r=sec.getBoundingClientRect();
    const inside=on===sec?(r.top<vh*.62&&r.bottom>vh*.38):(r.top<vh*.5&&r.bottom>vh*.5);
    if(inside)hit=sec});
-  if(hit!==on){on=hit;ds.forEach(sec=>sec.classList.toggle('lit',sec===on));document.body.classList.toggle('is-night',!!on);sf.setVisible(!!on)}};
+  if(hit!==on){on=hit;ds.forEach(sec=>sec.classList.toggle('lit',sec===on));document.body.classList.toggle('is-night',!!on)}};
  let tk=false;addEventListener('scroll',()=>{if(!tk){tk=true;requestAnimationFrame(()=>{tk=false;up()})}},{passive:true});addEventListener('resize',up);up()}
 /* analytics events */
 {const ev=(n,p)=>{try{if(window.gtag)gtag('event',n,p||{})}catch(_){}};
