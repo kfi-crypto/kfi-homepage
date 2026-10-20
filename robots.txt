@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://kfi.ai.kr/sitemap.xml
