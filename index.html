@@ -794,6 +794,23 @@ section.dark.lit .glass{background:rgba(255,255,255,.96);box-shadow:0 30px 70px 
 .cap6 .orb svg{width:24px;height:24px;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;position:relative;z-index:1}
 
 
+
+/* ===== quiet background effects behind the white page ===== */
+/* 1. flowing light: aurora colours drift section by section */
+.aurora i{transition:background 2.4s ease,transform 2.4s ease}
+body.fx-flow .aurora i:nth-child(1){background:radial-gradient(circle,var(--a1,#c9d6ff),transparent 65%)}
+body.fx-flow .aurora i:nth-child(2){background:radial-gradient(circle,var(--a2,#e4d9ff),transparent 65%)}
+body.fx-flow .aurora i:nth-child(3){background:radial-gradient(circle,var(--a3,#fff0b3),transparent 65%)}
+body.fx-flow .aurora{transform:translate3d(0,var(--ay,0px),0);transition:transform .6s linear}
+/* 2. parcel lines: a faint city-block mesh, an occasional parcel lights up as if scanned */
+.parcels{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:0;transition:opacity 1s ease}
+body.fx-parcel .parcels{opacity:1}
+/* 3. cursor light */
+.cursorlight{position:fixed;left:0;top:0;width:520px;height:520px;margin:-260px 0 0 -260px;border-radius:50%;z-index:0;pointer-events:none;opacity:0;
+ background:radial-gradient(circle,rgba(237,191,7,.10),rgba(61,107,255,.06) 40%,transparent 70%);transition:opacity .6s ease;will-change:transform}
+body.fx-cursor .cursorlight.on{opacity:1}
+@media (hover:none),(max-width:900px){.cursorlight{display:none}}
+@media (prefers-reduced-motion:reduce){.aurora i{transition:none}body.fx-flow .aurora{transform:none}}
 @media (max-width:700px){
  .aurora i{filter:blur(48px);animation:none}
  .glass,.nav.solid,.orbit-chip,.fab,.chatbox,.stage .cap{backdrop-filter:none;-webkit-backdrop-filter:none}
@@ -804,6 +821,7 @@ section.dark.lit .glass{background:rgba(255,255,255,.96);box-shadow:0 30px 70px 
 </head>
 <body>
 <div class="aurora" aria-hidden="true"><i></i><i></i><i></i></div>
+<div class="cursorlight" aria-hidden="true"></div>
 
 <div class="progress" aria-hidden="true"><i id="prog"></i></div>
 <nav class="nav" id="nav" aria-label="주 메뉴">
@@ -1503,6 +1521,53 @@ welcome();
  document.getElementById('cform')?.addEventListener('submit',()=>ev('inquiry_form_submit'),{capture:true});
  document.querySelectorAll('.faq details').forEach(d=>d.addEventListener('toggle',()=>{if(d.open)ev('faq_open',{question:d.querySelector('summary').textContent})}));
 }
+
+
+/* ---------- quiet background effects ---------- */
+{const B=document.body,RMx=matchMedia('(prefers-reduced-motion: reduce)').matches;
+ const ON=["flow", "cursor"];ON.forEach(k=>B.classList.add('fx-'+k));
+ /* 1. flowing light — palette per section, crossfades as you scroll */
+ const PAL={top:['#c9d6ff','#e4d9ff','#fff0b3'],vision:['#dfe6ff','#efe3ff','#fff3c4'],tech:['#c4d4ff','#d9e4ff','#fff0b3'],engine:['#d8ccff','#c9d6ff','#ffe9a8'],
+  tour:['#c8f0e4','#d6e4ff','#fff3c4'],flow:['#d6e4ff','#e8defe','#fff0b3'],insight:['#ffe1cc','#e4d9ff','#fff0b3'],calc:['#fff0b3','#d6e4ff','#ffe1cc'],
+  numbers:['#c9d6ff','#e4d9ff','#fff0b3'],why:['#ffd9e0','#e4d9ff','#fff0b3'],who:['#c8f0e4','#c9d6ff','#fff3c4'],media:['#e4d9ff','#c9d6ff','#fff0b3'],
+  company:['#c9d6ff','#d8f0e8','#fff0b3'],faq:['#fff0b3','#e4d9ff','#c9d6ff'],contact:['#fff0b3','#e4d9ff','#c9d6ff']};
+ const secs=Object.keys(PAL).map(id=>document.getElementById(id)).filter(Boolean);let curP='';
+ const flow=()=>{if(!B.classList.contains('fx-flow'))return;const mid=innerHeight*.45;let pick=secs[0];
+  for(const s of secs){const r=s.getBoundingClientRect();if(r.top<=mid)pick=s}
+  if(pick&&pick.id!==curP){curP=pick.id;const p=PAL[curP];B.style.setProperty('--a1',p[0]);B.style.setProperty('--a2',p[1]);B.style.setProperty('--a3',p[2])}
+  if(!RMx){const h=document.documentElement.scrollHeight-innerHeight;B.style.setProperty('--ay',(-(scrollY/(h||1))*60).toFixed(1)+'px')}};
+ /* 2. parcel lines — periodic jittered mesh, parallax, occasional "scanned" parcel */
+ const cv=document.querySelector('.parcels')||document.createElement('canvas'),cx=cv.getContext('2d');const C=12,R=10;let W=0,H=0,S=0,G=[],lit=[],raf=0;
+ const rnd=(a,b)=>a+Math.random()*(b-a);
+ function mesh(){S=Math.max(110,Math.min(170,innerWidth/9));G=[];for(let r=0;r<R;r++){G[r]=[];for(let c=0;c<C;c++)G[r][c]=[rnd(-.28,.28)*S,rnd(-.28,.28)*S]}}
+ function size(){const d=Math.min(devicePixelRatio||1,2);W=innerWidth;H=innerHeight;cv.width=W*d;cv.height=H*d;cv.style.width=W+'px';cv.style.height=H+'px';cx.setTransform(d,0,0,d,0,0);mesh()}
+ const P=(r,c)=>{const rr=((r%R)+R)%R,cc=((c%C)+C)%C,j=G[rr][cc];return[c*S+j[0],r*S+j[1]]};
+ function draw(t){cx.clearRect(0,0,W,H);if(!B.classList.contains('fx-parcel')){raf=0;return}
+  const oy=RMx?0:-(scrollY*.18)%(R*S),ox=-S*.5;const r0=Math.floor((-oy)/S)-1,r1=r0+Math.ceil(H/S)+2,c1=Math.ceil(W/S)+2;
+  cx.save();cx.translate(ox,oy);
+  /* highlighted parcels */
+  lit=lit.filter(L=>t-L.t0<4200);if(!RMx&&(!lit.length||t-lit[lit.length-1].t0>1500)&&lit.length<3)lit.push({r:Math.floor(rnd(r0+1,r1-1)),c:Math.floor(rnd(1,c1-1)),t0:t});
+  for(const L of lit){const k=(t-L.t0)/4200,a=Math.sin(Math.PI*Math.min(1,k));const q=[P(L.r,L.c),P(L.r,L.c+1),P(L.r+1,L.c+1),P(L.r+1,L.c)];
+   cx.fillStyle=`rgba(237,191,7,${.10*a})`;cx.strokeStyle=`rgba(200,150,0,${.35*a})`;cx.lineWidth=1.2;cx.beginPath();cx.moveTo(...q[0]);q.slice(1).forEach(p=>cx.lineTo(...p));cx.closePath();cx.fill();cx.stroke()}
+  /* mesh lines */
+  cx.strokeStyle='rgba(24,30,90,.055)';cx.lineWidth=1;cx.beginPath();
+  for(let r=r0;r<=r1;r++)for(let c=-1;c<=c1;c++){const a=P(r,c),b=P(r,c+1),d=P(r+1,c);cx.moveTo(...a);cx.lineTo(...b);cx.moveTo(...a);cx.lineTo(...d)}
+  cx.stroke();cx.restore();
+  raf=RMx?0:requestAnimationFrame(draw)}
+ const startParcel=()=>{cancelAnimationFrame(raf);raf=requestAnimationFrame(draw)};
+ size();addEventListener('resize',()=>{clearTimeout(size.t);size.t=setTimeout(()=>{size();startParcel()},150)});
+ if(RMx)addEventListener('scroll',()=>requestAnimationFrame(draw),{passive:true});
+ document.addEventListener('visibilitychange',()=>{if(document.hidden)cancelAnimationFrame(raf);else startParcel()});
+ /* 3. cursor light */
+ const cl=document.querySelector('.cursorlight');let tx=0,ty=0,x=0,y=0,cr=0;
+ const loop=()=>{x+=(tx-x)*.12;y+=(ty-y)*.12;cl.style.transform=`translate3d(${x}px,${y}px,0)`;cr=(Math.abs(tx-x)+Math.abs(ty-y)>.5)?requestAnimationFrame(loop):0};
+ addEventListener('pointermove',e=>{if(e.pointerType!=='mouse'||!B.classList.contains('fx-cursor'))return;tx=e.clientX;ty=e.clientY;cl.classList.add('on');if(!cr)cr=requestAnimationFrame(loop)},{passive:true});
+ document.addEventListener('pointerleave',()=>cl.classList.remove('on'));
+ let tk=false;addEventListener('scroll',()=>{if(!tk){tk=true;requestAnimationFrame(()=>{tk=false;flow()})}},{passive:true});flow();startParcel();
+ /* preview switcher */
+ document.querySelectorAll('.fxpanel [data-fx]').forEach(b=>{const k=b.dataset.fx;b.setAttribute('aria-pressed',B.classList.contains('fx-'+k));
+  b.onclick=()=>{const on=B.classList.toggle('fx-'+k);b.setAttribute('aria-pressed',on);if(k==='parcel')startParcel();if(k==='flow'){curP='';flow()}if(k==='cursor'&&!on)cl.classList.remove('on');
+   if(k==='flow'&&!on){['--a1','--a2','--a3','--ay'].forEach(v=>B.style.removeProperty(v))}}})}
 
 /* media room filter */
 {const ul=$('#plist');if(ul){const feat=document.querySelector('.pfeat');document.querySelectorAll('.ptabs .chip').forEach(b=>b.onclick=()=>{const f=b.dataset.f;document.querySelectorAll('.ptabs .chip').forEach(x=>x.setAttribute('aria-pressed',x===b));
