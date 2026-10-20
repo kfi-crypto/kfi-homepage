@@ -778,6 +778,8 @@ section.dark.lit .glass{background:rgba(255,255,255,.96);box-shadow:0 30px 70px 
 #engine #orbit > text{fill:var(--ink)}
 #engine #orbit > text + text{fill:#8a8fb0}
 #engine.lit #orbit .spin circle:first-child{stroke:rgba(255,255,255,.18)}
+#engine.lit #orbit > text,#engine.lit #orbit .node text:first-of-type{fill:var(--ink)}
+#engine.lit #orbit > text + text{fill:#8a8fb0}
 #why.lit .mk .glass{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.12);box-shadow:none}
 #why.lit .mk b{color:#fff}#why.lit .mk span{color:#aeb3d6}
 #why.lit .bigstat{background:linear-gradient(140deg,#1d2260,#11143a);border-color:rgba(255,255,255,.12)}
@@ -792,6 +794,18 @@ section.dark.lit .glass{background:rgba(255,255,255,.96);box-shadow:0 30px 70px 
 .cap6 .orb svg{width:24px;height:24px;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;position:relative;z-index:1}
 
 
+
+/* ===== VARIANT A: keep the night crossfade, add KAP-style depth ===== */
+.night .stars{position:absolute;inset:0;width:100%;height:100%;opacity:.9}
+section.dark{padding-block:clamp(200px,20vw,260px)!important}
+section.dark{scroll-margin-top:calc(112px - clamp(200px,20vw,260px) + env(safe-area-inset-top,0px))!important}
+/* content arrives after the scene has changed */
+section.dark .rv{transition:opacity 1s ease,transform 1s cubic-bezier(.2,.7,.2,1),filter 1s ease}
+section.dark:not(.lit) .rv.in{opacity:.001;transform:translateY(36px);filter:blur(6px)}
+section.dark.lit .rv.in{transition-delay:.35s}
+section.dark.lit .rv.in:nth-child(2){transition-delay:.5s}
+section.dark.lit .rv.in:nth-child(3){transition-delay:.65s}
+@media (prefers-reduced-motion:reduce){section.dark:not(.lit) .rv.in{opacity:1;transform:none;filter:none}}
 @media (max-width:700px){
  .aurora i{filter:blur(48px);animation:none}
  .glass,.nav.solid,.orbit-chip,.fab,.chatbox,.stage .cap{backdrop-filter:none;-webkit-backdrop-filter:none}
@@ -1485,14 +1499,32 @@ welcome();
  t.onclick=()=>{scrollTo({top:0,behavior:RM?'auto':'smooth'});$('#nav .logo').focus({preventScroll:true})}}
 
 
+
+/* ---------- star / network field (shared) ---------- */
+window.kfiStars=function(host,opt){opt=opt||{};const RMs=matchMedia('(prefers-reduced-motion: reduce)').matches;
+ const cv=document.createElement('canvas');cv.className='stars';cv.setAttribute('aria-hidden','true');host.prepend(cv);const cx=cv.getContext('2d');
+ let W=0,H=0,P=[],vis=true,raf=0;const N=()=>Math.round(Math.min(160,(W*H)/9000));
+ function size(){const r=cv.getBoundingClientRect(),d=Math.min(devicePixelRatio||1,2);W=r.width;H=r.height;cv.width=W*d;cv.height=H*d;cx.setTransform(d,0,0,d,0,0);
+  P=Array.from({length:N()},()=>({x:Math.random()*W,y:Math.random()*H,r:Math.random()*1.3+.3,v:(Math.random()*.12+.03),tw:Math.random()*6.28,g:Math.random()<.12}))}
+ function draw(t){cx.clearRect(0,0,W,H);
+  for(let i=0;i<P.length;i++){const a=P[i];if(!RMs){a.y-=a.v;if(a.y<-4){a.y=H+4;a.x=Math.random()*W}}
+   const al=.35+.45*Math.sin(t/1400+a.tw)**2;cx.fillStyle=a.g?`rgba(237,191,7,${al})`:`rgba(220,226,255,${al})`;cx.beginPath();cx.arc(a.x,a.y,a.r,0,6.283);cx.fill();
+   for(let j=i+1;j<P.length&&j<i+12;j++){const b=P[j],dx=a.x-b.x,dy=a.y-b.y,d=dx*dx+dy*dy;if(d<8000){cx.strokeStyle=`rgba(150,165,255,${.10*(1-d/8000)})`;cx.lineWidth=.6;cx.beginPath();cx.moveTo(a.x,a.y);cx.lineTo(b.x,b.y);cx.stroke()}}}
+  if(!RMs&&vis)raf=requestAnimationFrame(draw)}
+ size();addEventListener('resize',()=>{clearTimeout(size.t);size.t=setTimeout(()=>{size();if(RMs)draw(0)},150)});
+ const target=opt.watch||host;
+ if('IntersectionObserver' in window&&!opt.always)new IntersectionObserver(es=>{vis=es[0].isIntersecting;cancelAnimationFrame(raf);if(vis)raf=requestAnimationFrame(draw)}).observe(target);
+ if(RMs)draw(0);else raf=requestAnimationFrame(draw);
+ return{setVisible(v){vis=v;cancelAnimationFrame(raf);if(v&&!RMs)raf=requestAnimationFrame(draw)}}};
+
 /* ---------- night mode while dark sections are in view ---------- */
 {const ds=[...document.querySelectorAll('section.dark')];const nt=document.createElement('div');nt.className='night';nt.setAttribute('aria-hidden','true');
- document.querySelector('.aurora').after(nt);let on=null;
+ document.querySelector('.aurora').after(nt);let on=null;const sf=window.kfiStars(nt,{always:true});sf.setVisible(false);
  const up=()=>{const vh=innerHeight;let hit=null;
   ds.forEach(sec=>{const r=sec.getBoundingClientRect();
    const inside=on===sec?(r.top<vh*.62&&r.bottom>vh*.38):(r.top<vh*.5&&r.bottom>vh*.5);
    if(inside)hit=sec});
-  if(hit!==on){on=hit;ds.forEach(sec=>sec.classList.toggle('lit',sec===on));document.body.classList.toggle('is-night',!!on)}};
+  if(hit!==on){on=hit;ds.forEach(sec=>sec.classList.toggle('lit',sec===on));document.body.classList.toggle('is-night',!!on);sf.setVisible(!!on)}};
  let tk=false;addEventListener('scroll',()=>{if(!tk){tk=true;requestAnimationFrame(()=>{tk=false;up()})}},{passive:true});addEventListener('resize',up);up()}
 /* analytics events */
 {const ev=(n,p)=>{try{if(window.gtag)gtag('event',n,p||{})}catch(_){}};
