@@ -3,6 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<!-- Google Analytics 4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-YR8Z4WFVBE"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-YR8Z4WFVBE');</script>
 <title>KFI 한국금융투자</title>
 <meta name="description" content="KFI 한국금융투자 · AIFF — AI가 비아파트 경·공매의 가치를 읽어냅니다.">
 <meta name="theme-color" content="#ffffff">
@@ -1084,7 +1087,9 @@ body.menu-open .totop{display:none}
 <p>문의 처리 목적이 달성되면 지체 없이 파기합니다. 다만 관계 법령에 따라 보존할 필요가 있는 경우 해당 기간 동안 보관합니다.</p>
 <h3>3. 수집 방법</h3>
 <p>홈페이지 문의 양식에 작성하신 내용으로 이용자의 메일 앱에서 문의 메일이 만들어지며, 이용자가 직접 발송한 메일로 수집됩니다. 이 페이지는 문의 내용을 별도 서버에 저장하지 않습니다.</p>
-<h3>4. 제3자 제공 및 처리 위탁</h3>
+<h3>4. 자동 수집 정보(방문 통계)</h3>
+<p>회사는 홈페이지 이용 현황을 파악하고 서비스를 개선하기 위해 Google 애널리틱스를 사용합니다. 이 과정에서 쿠키를 통해 방문 페이지, 이용 시간, 접속 기기·브라우저 종류, 대략적인 지역 등 개인을 직접 식별할 수 없는 정보가 수집됩니다. 이용자는 브라우저 설정에서 쿠키 저장을 거부하거나 Google 애널리틱스 차단 브라우저 부가기능(tools.google.com/dlpage/gaoptout)을 이용해 수집을 거부할 수 있습니다.</p>
+<h3>4-1. 제3자 제공 및 처리 위탁</h3>
 <p>회사는 이용자의 동의 없이 개인정보를 제3자에게 제공하지 않습니다. 처리 위탁이 생기는 경우 이 방침을 통해 수탁자와 위탁 업무를 공개합니다.</p>
 <h3>5. 파기 절차와 방법</h3>
 <p>보유 기간이 끝나거나 목적이 달성된 개인정보는 복구할 수 없는 방법으로 삭제하며, 출력물은 분쇄하거나 소각합니다.</p>
@@ -1409,6 +1414,24 @@ welcome();
 /* ---------- to top ---------- */
 {const t=$('#totop');let tk=false;addEventListener('scroll',()=>{if(tk)return;tk=true;requestAnimationFrame(()=>{tk=false;t.classList.toggle('on',scrollY>innerHeight*1.2)})},{passive:true});
  t.onclick=()=>{scrollTo({top:0,behavior:RM?'auto':'smooth'});$('#nav .logo').focus({preventScroll:true})}}
+
+
+/* analytics events */
+{const ev=(n,p)=>{try{if(window.gtag)gtag('event',n,p||{})}catch(_){}};
+ document.addEventListener('click',e=>{const a=e.target.closest&&e.target.closest('a,button');if(!a)return;
+  const h=a.getAttribute('href')||'';
+  if(h.includes('kfi.finance'))ev('open_analysis_system',{location:(a.closest('section,nav,header,.msheet')||{}).id||(a.closest('footer')?'footer':'')});
+  else if(h.includes('mail.google.com'))ev('generate_lead',{method:'gmail_inquiry'});
+  else if(a.id==='ccopy')ev('generate_lead',{method:'copy_inquiry'});
+  else if(a.id==='copy')ev('copy_email');
+  else if(a.id==='fab')ev('open_chat');
+  else if(a.matches('.cpreset .chip'))ev('calculator_preset',{preset:a.textContent});
+  else if(a.matches('#gterms .chip'))ev('glossary_view',{term:a.textContent});
+ },{capture:true,passive:true});
+ let cu=false;document.getElementById('calcf')?.addEventListener('input',()=>{if(!cu){cu=true;ev('calculator_use')}});
+ document.getElementById('cform')?.addEventListener('submit',()=>ev('inquiry_form_submit'),{capture:true});
+ document.querySelectorAll('.faq details').forEach(d=>d.addEventListener('toggle',()=>{if(d.open)ev('faq_open',{question:d.querySelector('summary').textContent})}));
+}
 
 /* media room filter */
 {const ul=$('#plist');if(ul){const feat=document.querySelector('.pfeat');document.querySelectorAll('.ptabs .chip').forEach(b=>b.onclick=()=>{const f=b.dataset.f;document.querySelectorAll('.ptabs .chip').forEach(x=>x.setAttribute('aria-pressed',x===b));
