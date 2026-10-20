@@ -812,6 +812,35 @@ body.fx-parcel .parcels{opacity:1}
 body.fx-cursor .cursorlight.on{opacity:1}
 @media (hover:none),(max-width:900px){.cursorlight{display:none}}
 @media (prefers-reduced-motion:reduce){.aurora i{transition:none}body.fx-flow .aurora{transform:none}}
+
+/* ---------- slimmed product block ---------- */
+.steps4{list-style:none;margin:26px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:8px 0;align-items:center}
+.steps4 li{display:inline-flex;align-items:center;gap:8px;font-size:14.5px;font-weight:600;color:var(--ink)}
+.steps4 li b{display:grid;place-items:center;width:26px;height:26px;border-radius:50%;background:var(--ink);color:#fff;font-size:11px;font-weight:700}
+.steps4 li:last-child b{background:var(--gold);color:#15120a}
+.steps4 li+li::before{content:"";width:34px;height:1.5px;margin:0 12px;background:linear-gradient(90deg,var(--gold),var(--blue));opacity:.6}
+@media (max-width:560px){.steps4 li+li::before{width:16px;margin:0 6px}.steps4 li{font-size:13px}}
+
+/* ---------- review fixes ---------- */
+.plate{background:linear-gradient(135deg,rgba(255,255,255,.18),rgba(232,236,255,.10));-webkit-backdrop-filter:none;backdrop-filter:none}
+.plate.on{background:linear-gradient(135deg,rgba(255,236,160,.55),rgba(201,214,255,.35))}
+.plate .lab{color:#2b3170;opacity:1;font-size:13.5px;text-shadow:0 0 6px #fff,0 0 2px #fff;z-index:2}
+.plate{isolation:isolate}
+.plate.on .lab{opacity:1;color:#5a4300}
+.herofn{margin-top:14px;font-size:12px;animation:bloom 1.2s 1s both}
+.tlmore{display:none;margin:14px auto 0;padding:11px 18px;font-size:14px}
+@media (max-width:820px){.tl.collapsed li:nth-child(n+6){display:none}.tlmore{display:flex}}
+@media (max-width:700px){
+ .fab{padding:7px;gap:0;font-size:0;line-height:0}
+ .fab .blob{width:38px;height:38px}
+ .eng>.rv:first-child{display:none}
+ .dots8{gap:8px}.dots8 button{height:6px;width:24px}.dots8 button[aria-current="true"]{width:40px}
+ .caps{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:12px;margin-inline:-20px;padding:4px 20px 16px;scrollbar-width:none}
+ .caps::-webkit-scrollbar{display:none}
+ .cap6{flex:0 0 82%;scroll-snap-align:start}
+ .tl5 span:not(.n){display:none}
+}
+@media (max-width:560px){.steps4{display:grid;grid-template-columns:1fr 1fr;gap:10px 12px}.steps4 li+li::before{display:none}}
 @media (max-width:700px){
  .aurora i{filter:blur(48px);animation:none}
  .glass,.nav.solid,.orbit-chip,.fab,.chatbox,.stage .cap{backdrop-filter:none;-webkit-backdrop-filter:none}
@@ -840,7 +869,7 @@ body.fx-cursor .cursorlight.on{opacity:1}
     <div class="acts"><a class="btn c" href="#contact">문의하기</a><a class="btn gold" href="http://www.kfi.finance" target="_blank" rel="noopener">분석 시스템 <span class="ext">↗</span></a><button class="burger" id="burger" type="button" aria-label="메뉴 열기" aria-expanded="false" aria-controls="msheet"><span></span><span></span><span></span></button></div>
   </div>
 </nav>
-<div class="msheet" id="msheet" hidden><a href="#vision">비전·미션</a><a href="#tech">핵심 기술</a><a href="#engine">AIFF</a><a href="#tour">AIFF 미리보기</a><a href="#calc">수익률 계산기</a><a href="#media">미디어룸</a><a href="#company">회사</a><a href="#faq">자주 묻는 질문</a><a href="#contact">문의하기</a><a class="btn gold" href="http://www.kfi.finance" target="_blank" rel="noopener">AIFF 분석 시스템 ↗</a></div>
+<div class="msheet" id="msheet" hidden><a href="#vision">비전·미션</a><a href="#tech">핵심 기술</a><a href="#engine">AIFF</a><a href="#tour">AIFF 미리보기</a><a href="#media">미디어룸</a><a href="#company">회사</a><a href="#faq">자주 묻는 질문</a><a href="#contact">문의하기</a><a class="btn gold" href="http://www.kfi.finance" target="_blank" rel="noopener">AIFF 분석 시스템 ↗</a></div>
 
 <main>
 <header class="hero" id="top">
@@ -849,8 +878,9 @@ body.fx-cursor .cursorlight.on{opacity:1}
       <span class="eyebrow"><i></i>AIFF · AI-Fast Finder</span>
       <h1><span class="w">보이지 않던 집의 가치,</span><br><span class="w grad" style="animation-delay:.15s">AI가 기준을 세웁니다</span></h1>
       <p class="lead">KFI 한국금융투자는 데이터와 AI로 주거자산의 가치를 측정하고, 시장이 신뢰할 수 있는 가치평가와 의사결정의 새로운 표준을 만듭니다.</p>
-      <div class="cta"><a class="btn gold" href="http://www.kfi.finance" target="_blank" rel="noopener">AIFF 분석 시스템 바로가기 <span class="ext">↗</span></a><a class="btn" href="#calc">내 수익률 계산해 보기</a></div>
+      <div class="cta"><a class="btn gold" href="http://www.kfi.finance" target="_blank" rel="noopener">AIFF 분석 시스템 바로가기 <span class="ext">↗</span></a><a class="btn" href="#tour">실제 분석 화면 보기</a></div>
       <div class="trust"><span>금융위원회 D-테스트베드 선정</span><span>서울대학교 R&amp;D 연구소</span><span>대일감정원 가치평가 MOU</span></div>
+      <p class="note herofn">* AI 스코어링 정확도 98%는 과거 10년치 데이터를 기준으로 산정한 값입니다.</p>
     </div>
     <div class="stage">
       <canvas id="hero" aria-label="AI가 데이터를 모아 도시를 읽고 수익을 계산하는 과정을 표현한 파티클 모션그래픽"></canvas>
@@ -927,6 +957,9 @@ body.fx-cursor .cursorlight.on{opacity:1}
       <span class="eyebrow"><i></i>AIFF Engine</span>
       <h2 class="h2">AIFF, 기술이<br><span class="grad">일하는 방식</span></h2>
       <p class="lead">AIFF(AI-Fast Finder)는 KFI의 기술이 하나로 모인 분석 플랫폼입니다. 데이터를 읽고, 위험을 걸러내고, 가치와 수익을 계산하는 8단계를 하나의 엔진으로 연결해 물건 하나를 3초 만에 판단합니다.</p>
+      <ol class="steps4" aria-label="이용 방법">
+        <li><b>01</b>물건 고르기</li><li><b>02</b>목적 정하기</li><li><b>03</b>AI 분석</li><li><b>04</b>판단·리포트</li>
+      </ol>
     </div>
     <div class="eng">
       <div class="rv"><svg id="orbit" viewBox="0 0 600 600" role="img" aria-label="AIFF 엔진의 8단계"></svg></div>
@@ -955,18 +988,6 @@ body.fx-cursor .cursorlight.on{opacity:1}
   </div>
 </section>
 
-<section id="flow" style="padding-top:0">
-  <div class="wrap">
-    <div class="head c rv"><span class="eyebrow"><i></i>How it works</span><h2 class="h2">물건 하나,<br><span class="grad">네 단계면 충분합니다</span></h2><p class="lead">복잡한 서류 검토와 계산은 AI가 맡고, 판단에 필요한 답만 남깁니다.</p></div>
-    <div class="flow">
-      <article class="glass fstep rv"><span class="dot">01</span><small>SELECT</small><h3>물건 고르기</h3><p>관심 있는 비아파트 경·공매 물건을 고릅니다.</p></article>
-      <article class="glass fstep rv"><span class="dot">02</span><small>GOAL</small><h3>목적 정하기</h3><p>임대·실거주·단기·장기 중 투자 목적과 목표 수익률을 정합니다.</p></article>
-      <article class="glass fstep rv"><span class="dot">03</span><small>ANALYZE</small><h3>AI 분석</h3><p>권리·명도·입지·수지·낙찰확률을 AI가 한 번에 계산합니다.</p></article>
-      <article class="glass fstep rv"><span class="dot">04</span><small>DECIDE</small><h3>판단·리포트</h3><p>적정 여부와 추천 입찰 구간, 투자심사 리포트를 받아봅니다.</p></article>
-    </div>
-  </div>
-</section>
-
 <section id="insight" style="padding-top:0">
   <div class="wrap">
     <div class="head rv">
@@ -983,47 +1004,6 @@ body.fx-cursor .cursorlight.on{opacity:1}
   </div>
 </section>
 
-
-<section id="calc" style="padding-top:0">
-  <div class="wrap">
-    <div class="head rv"><span class="eyebrow"><i></i>Try it</span><h2 class="h2">표면수익률 말고,<br><span class="grad">실질수익률</span>로 보세요</h2><p class="lead">숫자를 직접 바꿔 보세요. ‘월세 ÷ 집값’으로는 보이지 않던 비용을 넣으면 실제로 남는 수익률이 달라집니다.</p></div>
-    <div class="calc">
-      <form class="glass cin rv" id="calcf" onsubmit="return false">
-        <div style="display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap"><h3>물건 정보 입력</h3><span class="note">단위: 만 원</span></div>
-        <div class="cpreset" role="group" aria-label="예시 불러오기"><button type="button" class="chip" aria-pressed="true" data-p="0">오피스텔 예시</button><button type="button" class="chip" aria-pressed="false" data-p="1">빌라 예시</button><button type="button" class="chip" aria-pressed="false" data-p="2">직접 입력</button></div>
-        <div class="cgrid">
-          <label>매입가(낙찰가)<span class="nwrap"><input id="c_price" inputmode="numeric" autocomplete="off"><i>만 원</i></span></label>
-          <label>보증금<span class="nwrap"><input id="c_dep" inputmode="numeric" autocomplete="off"><i>만 원</i></span></label>
-          <label>월세<span class="nwrap"><input id="c_rent" inputmode="numeric" autocomplete="off"><i>만 원</i></span></label>
-          <label>초기비용 <small>취득세·명도·수리</small><span class="nwrap"><input id="c_init" inputmode="numeric" autocomplete="off"><i>만 원</i></span></label>
-          <label style="grid-column:1/-1">연 운영비 <small>관리비·수선비·재산세·보험·중개수수료</small><span class="nwrap"><input id="c_op" inputmode="numeric" autocomplete="off"><i>만 원/년</i></span></label>
-        </div>
-        <div class="vac"><div class="top"><span>공실 기간</span><b id="c_vacv">1개월 / 년</b></div><input type="range" id="c_vac" min="0" max="6" step="1" value="1" aria-label="연간 공실 개월 수"></div>
-        <p class="cerr2" id="c_err" aria-live="polite"></p>
-      </form>
-      <div class="glass cout rv" aria-live="polite">
-        <h3>첫해 수익률</h3>
-        <div class="ybig"><div><small>표면수익률</small><b id="c_gross">-</b></div><span class="arr">→</span><div><small>실질수익률</small><b id="c_net" class="grad">-</b></div></div>
-        <p class="ydelta" id="c_delta"></p>
-        <div class="wfall" id="c_wf"></div>
-        <div class="cinv"><span>실제 투입금 <small>(매입가 + 초기비용 − 보증금)</small></span><b id="c_inv">-</b></div>
-        <div class="cfoot"><p>간이 계산이며 대출이자·양도세·매각차익은 반영하지 않습니다. AIFF 분석 시스템은 자금조달과 10년 현금흐름, IRR까지 계산합니다.</p><a class="btn gold" href="http://www.kfi.finance" target="_blank" rel="noopener">AIFF로 정밀 분석 <span class="ext">↗</span></a></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="numbers" style="padding-top:0">
-  <div class="wrap">
-    <div class="nums">
-      <div class="glass num spot rv"><b class="grad" data-to="3">3<small>초</small></b><p>물건당 AI 분석 시간</p></div>
-      <div class="glass num spot rv"><b class="grad" data-to="5">5<small>층</small></b><p>자기진화형 AI 엔진 아키텍처</p></div>
-      <div class="glass num spot rv"><b class="grad" data-to="98">98<small>%</small></b><p>AI 스코어링 정확도<span class="fn" style="font-size:.8em">*</span></p></div>
-      <div class="glass num spot rv"><b class="grad" data-to="8">8<small>단계</small></b><p>하나로 연결된 AI 분석 파이프라인</p></div>
-    </div>
-    <p class="note" style="margin-top:12px">* AI 스코어링 정확도는 과거 10년치 데이터를 기준으로 산정한 값입니다.</p>
-  </div>
-</section>
 
 <section id="why" style="padding-top:0">
   <div class="wrap">
@@ -1081,7 +1061,7 @@ body.fx-cursor .cursorlight.on{opacity:1}
     <div class="head rv"><span class="eyebrow"><i></i>Company</span><h2 class="h2">주거 부실자산 가치평가의<br><span class="grad">새로운 표준</span>을 만듭니다.</h2></div>
     <div class="co">
       <div class="rv">
-        <ol class="glass tl">
+        <ol class="glass tl collapsed" id="tl">
           <li class="k"><time>2026.09</time><span>금융위원회·한국핀테크지원센터 D-테스트베드 기관 선정</span></li>
           <li><time>2026.09</time><span>한국경제인협회 더하기 창업 프로젝트 최종 선정</span></li>
           <li><time>2026.07</time><span>씨엔티테크·단국대 TechBridge Batch 1기 선정</span></li>
@@ -1093,6 +1073,7 @@ body.fx-cursor .cursorlight.on{opacity:1}
           <li><time>2025.09</time><span>AI-Fast Finder System 개발 착수 (㈜Tart AI MOU)</span></li>
           <li class="k"><time>2025.08</time><span>한국금융투자 주식회사 설립</span></li>
         </ol>
+        <button type="button" class="btn tlmore" id="tlmore" aria-controls="tl" aria-expanded="false">전체 연혁 보기</button>
         <div class="pwall"><div><b>서울대학교</b><small>R&amp;D 연구소</small></div><div><b>대일감정원</b><small>가치평가 MOU</small></div><div><b>청현회계법인</b><small>회계 협력</small></div><div><b>서울특별시</b><small>서울창업허브 창동</small></div><div><b>서울경제진흥원</b><small>SBA FGP 3기</small></div><div><b>금융위원회</b><small>D-테스트베드</small></div><div><b>PRAPX</b><small>협력 파트너</small></div></div>
       </div>
       <div class="glass org rv">
@@ -1123,7 +1104,6 @@ body.fx-cursor .cursorlight.on{opacity:1}
       <details><summary>분석 결과대로 입찰하면 되나요?</summary><div class="a">분석 결과는 투자 판단을 돕는 참고 정보이며 매수·입찰 권유가 아닙니다. 등기부와 현장 상황을 직접 확인하신 뒤 스스로 판단해 주세요. 투자 결정과 그 결과에 대한 책임은 이용자 본인에게 있습니다.</div></details>
       <details><summary>실제 분석은 어디서 하나요?</summary><div class="a">상단의 ‘분석 시스템’ 버튼으로 AIFF 분석 시스템에 접속해 이용하실 수 있습니다. 이 페이지의 분석 화면과 수치는 시연용 가상 데이터입니다.</div></details>
       <details><summary>기관 도입이나 제휴는 어떻게 문의하나요?</summary><div class="a">아래 <a href="#contact">문의하기</a>에서 ‘제휴·협업’ 또는 ‘투자·IR’을 선택해 남겨 주시거나 Bu.ko@kfi.ai.kr로 메일을 보내 주세요.</div></details>
-      <details><summary>수익률 계산기 결과는 얼마나 정확한가요?</summary><div class="a">이 페이지의 계산기는 첫해 실질수익률을 빠르게 가늠해 보는 간이 도구입니다. 대출이자, 세금, 매각차익까지 반영한 정밀 분석은 AIFF 분석 시스템에서 하실 수 있습니다.</div></details>
     </div>
     <aside class="glass gloss rv" aria-labelledby="gtitle">
       <h3 id="gtitle">경매·공매 용어 사전</h3>
@@ -1159,8 +1139,8 @@ body.fx-cursor .cursorlight.on{opacity:1}
   <div class="ftop">
     <div><img src="media/logo.png" alt="KFI 한국금융투자" style="height:30px;width:auto"><p style="margin-top:14px;max-width:34ch;color:var(--muted)">데이터와 AI로, 모든 집의 가치를 투명하게.</p><p style="margin-top:10px">제휴·문의 Bu.ko@kfi.ai.kr</p></div>
     <div><h4>COMPANY</h4><ul><li><a href="#vision">비전·미션</a></li><li><a href="#company">조직·연혁</a></li><li><a href="#media">미디어룸</a></li></ul></div>
-    <div><h4>TECHNOLOGY</h4><ul><li><a href="#tech">핵심 기술</a></li><li><a href="#engine">AIFF 엔진</a></li><li><a href="#tour">미리보기</a></li><li><a href="#flow">이용 방법</a></li></ul></div>
-    <div><h4>SERVICE</h4><ul><li><a href="http://www.kfi.finance" target="_blank" rel="noopener">AIFF 분석 시스템 ↗</a></li><li><a href="#calc">수익률 계산기</a></li><li><a href="#faq">자주 묻는 질문</a></li><li><a href="#contact">문의하기</a></li></ul></div>
+    <div><h4>TECHNOLOGY</h4><ul><li><a href="#tech">핵심 기술</a></li><li><a href="#engine">AIFF 엔진</a></li><li><a href="#tour">미리보기</a></li><li><a href="#engine">이용 방법</a></li></ul></div>
+    <div><h4>SERVICE</h4><ul><li><a href="http://www.kfi.finance" target="_blank" rel="noopener">AIFF 분석 시스템 ↗</a></li><li><a href="#faq">자주 묻는 질문</a></li><li><a href="#contact">문의하기</a></li></ul></div>
   </div>
   <p class="biz"><span><b>상호</b> 한국금융투자 주식회사</span><span><b>대표</b> 고병욱</span><span><b>사업자등록번호</b> 296-81-03776</span><br><span><b>본사</b> (01411) 서울특별시 도봉구 마들로13길 84, 서울창업허브 창동 2층</span><br><span><b>R&amp;D</b> (08838) 서울특별시 관악구 신림로 134, 오성벤처타운 3층</span><span><b>이메일</b> Bu.ko@kfi.ai.kr</span></p>
   <p class="fdisc">AIFF가 제공하는 분석 결과는 투자 판단을 돕는 참고 정보이며, 특정 물건의 매수·입찰을 권유하거나 수익을 보장하지 않습니다. 이 페이지의 분석 화면과 수치는 시연용 가상 데이터입니다.</p>
@@ -1383,9 +1363,9 @@ const KB=`KFI 한국금융투자(Korea Financial Investment) 공개 정보:
 - 조직: 대표이사 아래 경영전략실(CSO), 사업본부(CBO), 기술개발본부(CTO), AX Lab(연구소장, 서울대 R&D 연구소). 검증 파트너: 감정평가법인·회계법인.
 - 보도: 2026.01 대일감정원과 AI 기반 부동산 금융 심사 고도화 업무협약(헤럴드경제·데일리안·세계일보·중앙일보), 2026.07 SBA퍼스트게이트 FGP 3기 선정(이넷뉴스). 미디어룸에서 원문 확인.
 - 이력: 금융위원회·한국핀테크지원센터 D-테스트베드 기관 선정(2026.09), 서울대 R&D 연구소(2026.05), 대일감정원·회계법인 MOU, 신용보증기금 NEST, 과기정통부 K-Global ICT, 중기부 모두의 창업 최우수.
-- 페이지 기능: 수익률 계산기(매입가·보증금·월세·초기비용·운영비·공실로 표면/실질수익률 비교, 간이 계산), 이용 방법 4단계(물건 고르기→목적 정하기→AI 분석→판단·리포트), 경매·공매 용어 사전.
+- 페이지 기능: 이용 방법 4단계(물건 고르기→목적 정하기→AI 분석→판단·리포트), 경매·공매 용어 사전.
 - 용어: 말소기준권리(이후 권리는 낙찰로 소멸), 대항력(임차인이 낙찰자에게 보증금을 요구할 수 있는 힘), 명도(점유자를 내보내는 절차), 낙찰가율(낙찰가÷감정가), 표면수익률(연 월세÷매입가), 실질수익률(공실·관리비·세금·취득비용 반영).`;
-const SECS={vision:'비전·미션',why:'시장',who:'고객',tech:'핵심 기술',engine:'AIFF 엔진',tour:'AIFF 미리보기',flow:'이용 방법',calc:'수익률 계산기',insight:'인사이트',media:'미디어룸',company:'회사·조직도',faq:'자주 묻는 질문',contact:'문의하기'};
+const SECS={vision:'비전·미션',why:'시장',who:'고객',tech:'핵심 기술',engine:'AIFF 엔진',tour:'AIFF 미리보기',insight:'인사이트',media:'미디어룸',company:'회사·조직도',faq:'자주 묻는 질문',contact:'문의하기'};
 /* demo-mode intents */
 const INT=[
  {k:['aiff','에이아이에프에프','서비스','뭐','무엇','소개'],q:'AIFF가 뭐예요?',a:'**AIFF(AI-Fast Finder)**는 빌라·오피스텔 같은 비아파트 경·공매 물건을 AI가 분석하는 투자 의사결정 플랫폼이에요.\n- 권리·명도·입지·수익을 한 번에 계산\n- 물건당 3초 만에 투자 가치 선별\n- 적정 입찰 구간까지 제시',go:'engine',f:['8단계 엔진이 궁금해요','실제 분석 화면을 볼 수 있나요?']},
@@ -1394,7 +1374,7 @@ const INT=[
  {k:['8단계','단계','과정','어떻게 분석','파이프라인'],q:'8단계 엔진이 궁금해요',a:'AIFF는 **권리 필터링 → 명도 정량화 → 맞춤형 입지분석 → 맞춤형 수지분석 → 낙찰확률 → 입찰전략 → 시장수익률 DB → 리포트** 순서로 분석해요. 엔진 그림에서 단계를 누르면 각 단계의 예시 화면을 볼 수 있어요.',go:'engine',f:['실제 분석 화면을 볼 수 있나요?','핵심 기술은 뭔가요?']},
  {k:['왜','지금','시장','필요','경매 증가','npl'],q:'왜 지금 필요한가요?',a:'서울 빌라·오피스텔 경매가 **1년 새 67.8%** 늘었고 은행권 NPL은 14.5조 원에 이르러요. 그런데 비아파트는 실거래가 적어 얼마를 받을 수 있는지 판단할 기준이 없죠. AIFF가 그 기준을 만듭니다.',go:'why',f:['AIFF가 뭐예요?','핵심 기술은 뭔가요?']},
  {k:['체험','해보','데모','시연','분석해','화면','미리보기','영상'],q:'실제 분석 화면을 볼 수 있나요?',a:'네! **AIFF 미리보기**에서 권리 분석, 맞춤형 입지분석, 맞춤형 수지분석, 입찰전략, 맞춤 순위 화면을 볼 수 있어요. 실제 물건 분석은 **AIFF 분석 시스템(www.kfi.finance)**에서 하실 수 있습니다.',go:'tour',f:['수익률은 어떻게 계산해요?','실제 시스템은 어디서 써요?']},
- {k:['수익률','수지','계산','irr','월세'],q:'수익률은 어떻게 계산해요?',a:'흔한 ‘월세÷집값’ 계산은 **표면수익률**이에요. AIFF의 **맞춤형 수지분석**은 총투자원가·자금조달, 10년 현금흐름, Project·Equity IRR과 NPV, 민감도까지 계산해 목표 수익률 대비 **적정/부적정**을 판정해요. 예시 오피스텔은 Equity IRR 26.8%로 목표 12%를 충족했어요. 투자 목적에 따라 보는 기준도 바뀌어요.\n- 임대: 빠진 비용까지 넣은 실질수익률 (예시 오피스텔 표면 7.4% → 첫해 4.3%)\n- 실거주: 월 실주거비를 같은 집 월세와 비교\n- 단기: 세금·이자를 뺀 세후 차익\n- 장기: 10년 뒤 가치와 투자배수',go:'calc',f:['실제 분석 화면을 볼 수 있나요?','명도가 뭐예요?']},
+ {k:['수익률','수지','계산','irr','월세'],q:'수익률은 어떻게 계산해요?',a:'흔한 ‘월세÷집값’ 계산은 **표면수익률**이에요. AIFF의 **맞춤형 수지분석**은 총투자원가·자금조달, 10년 현금흐름, Project·Equity IRR과 NPV, 민감도까지 계산해 목표 수익률 대비 **적정/부적정**을 판정해요. 예시 오피스텔은 Equity IRR 26.8%로 목표 12%를 충족했어요. 투자 목적에 따라 보는 기준도 바뀌어요.\n- 임대: 빠진 비용까지 넣은 실질수익률 (예시 오피스텔 표면 7.4% → 첫해 4.3%)\n- 실거주: 월 실주거비를 같은 집 월세와 비교\n- 단기: 세금·이자를 뺀 세후 차익\n- 장기: 10년 뒤 가치와 투자배수',go:'insight',f:['실제 분석 화면을 볼 수 있나요?','명도가 뭐예요?']},
  {k:['명도','점유','세입자','임차인','대항력'],q:'명도가 뭐예요?',a:'**명도**는 낙찰받은 집에 살고 있는 사람을 내보내는 절차예요. AIFF는 임차인의 대항력·배당요구·점유 상태를 보고 명도 난이도를 S~E 등급으로 매기고, 예상 기간과 비용을 수익률에 반영합니다.',go:'engine',f:['수익률은 어떻게 계산해요?','8단계 엔진이 궁금해요']},
  {k:['정확','신뢰','검증'],q:'정확도는 어느 정도예요?',a:'AI 스코어링 정확도는 과거 10년치 데이터를 기준으로 산정한 **98%**예요. 감정평가법인과 회계법인이 자산가치와 수지모델을 교차 검증하고, 서울대학교 R&D 연구소와 함께 모델을 고도화하고 있어요.',go:'tech',f:['핵심 기술은 뭔가요?','어떤 곳과 협력하나요?']},
  {k:['협력','파트너','mou','감정원','대일','언론','기사','보도','뉴스'],q:'어떤 곳과 협력하나요?',a:'2026년 1월 **대일감정원**과 AI 기반 부동산 금융 심사 고도화 업무협약을 맺었고, 회계법인·서울대학교와도 협력하고 있어요. FGP 3기 선정, 금융위원회 D-테스트베드 선정 소식은 미디어룸에서 볼 수 있어요.',go:'media',f:['회사 소개를 해주세요','제휴 문의하고 싶어요']},
@@ -1402,9 +1382,8 @@ const INT=[
  {k:['문의','제휴','연락','협업','도입','메일','투자'],q:'제휴 문의하고 싶어요',a:'환영해요! 아래 **문의하기**에서 유형을 고르고 내용을 남기시면 문의 메일이 준비돼요. 직접 메일은 **Bu.ko@kfi.ai.kr**로 보내 주셔도 됩니다.',go:'contact',f:['회사 소개를 해주세요','실제 시스템은 어디서 써요?']},
  {k:['시스템','로그인','사이트','kfi.finance','사용'],q:'실제 시스템은 어디서 써요?',a:'실제 물건 분석은 **AIFF 분석 시스템(www.kfi.finance)**에서 해요. 페이지 상단의 ‘분석 시스템’ 버튼으로 바로 열 수 있어요.',f:['실제 분석 화면을 볼 수 있나요?','제휴 문의하고 싶어요']}];
 INT.push({k:['용어','뜻','말소','낙찰가율','배당','공매','경매 차이'],q:'경매 용어가 어려워요',a:'페이지 아래 **경매·공매 용어 사전**에서 말소기준권리, 대항력, 배당요구, 명도, 낙찰가율 같은 핵심 용어를 쉽게 정리해 두었어요.',go:'faq',f:['명도가 뭐예요?','수익률은 어떻게 계산해요?']},
- {k:['계산기','직접 계산','내 수익률','얼마 남'],q:'내 수익률을 계산해 볼 수 있나요?',a:'네! **수익률 계산기**에 매입가, 보증금, 월세, 초기비용, 운영비, 공실 기간을 넣으면 표면수익률과 첫해 **실질수익률**을 바로 비교해 볼 수 있어요. 대출과 10년 현금흐름까지 보려면 AIFF 분석 시스템을 이용해 주세요.',go:'calc',f:['수익률은 어떻게 계산해요?','실제 시스템은 어디서 써요?']},
  {k:['누구','고객','대상','기관','개인'],q:'누가 쓸 수 있나요?',a:'개인 투자자·실수요자부터 **투자사·자산운용사, 금융기관, 감정평가·회계·중개 같은 전문기관과 공공**까지 주거자산을 판단하는 모든 곳에서 쓸 수 있어요.',go:'who',f:['AIFF가 뭐예요?','제휴 문의하고 싶어요']});
-const STARTERS=['AIFF가 뭐예요?','내 수익률을 계산해 볼 수 있나요?','실제 분석 화면을 볼 수 있나요?','제휴 문의하고 싶어요'];
+const STARTERS=['AIFF가 뭐예요?','수익률은 어떻게 계산해요?','실제 분석 화면을 볼 수 있나요?','제휴 문의하고 싶어요'];
 const msgs=$('#msgs'),chat=$('#chat'),fab=$('#fab'),cin=$('#cin'),csend=$('#csend'),cstop=$('#cstop');let turns=[],cctl=null;
 function md(t){let h=esc(t).replace(/\*\*(.+?)\*\*/g,'<b>$1</b>');const lines=h.split('\n');let out='',inL=false;
  for(const l of lines){const m=l.match(/^\s*(?:[-•·]|\d+[.)])\s+(.*)/);if(m){if(!inL){out+='<ul>';inL=true}out+='<li>'+m[1]+'</li>'}else{if(inL){out+='</ul>';inL=false}if(l.trim())out+='<p>'+l+'</p>'}}
@@ -1463,29 +1442,9 @@ ${ctxLine()}`;
 welcome();
 
 
-/* ---------- calculator ---------- */
-{const P=[{price:22000,dep:1000,rent:135,init:1200,op:480,vac:1},{price:18000,dep:2000,rent:90,init:1300,op:300,vac:1}];
- const F=['price','dep','rent','init','op'],inp={};F.forEach(k=>inp[k]=$('#c_'+k));const vac=$('#c_vac');
- const won=v=>{v=Math.round(v);const a=Math.abs(v),sg=v<0?'−':'';if(a>=10000){const e=Math.floor(a/10000),r=a%10000;return sg+e+'억'+(r?' '+r.toLocaleString('ko-KR')+'만':'')+' 원'}return sg+a.toLocaleString('ko-KR')+'만 원'};
- const num=el=>{const v=parseFloat(String(el.value).replace(/[^0-9.]/g,''));return isFinite(v)?v:0};
- const fmtIn=el=>{const v=num(el);el.value=v?v.toLocaleString('ko-KR'):''};
- const pb=[...document.querySelectorAll('.cpreset .chip')];
- function load(i){const p=P[i];F.forEach(k=>{inp[k].value=p[k].toLocaleString('ko-KR')});vac.value=p.vac;pb.forEach((b,j)=>b.setAttribute('aria-pressed',j===i));calc()}
- function calc(){const v={};F.forEach(k=>v[k]=num(inp[k]));const m=+vac.value;$('#c_vacv').textContent=m+'개월 / 년';
-  const err=$('#c_err'),inv=v.price+v.init-v.dep,gross=v.rent*12,loss=v.rent*m,net=gross-loss-v.op;
-  if(!v.price||!v.rent){err.textContent='매입가와 월세를 입력해 주세요.';$('#c_gross').textContent=$('#c_net').textContent='-';$('#c_wf').innerHTML='';$('#c_delta').textContent='';$('#c_inv').textContent='-';return}
-  if(inv<=0){err.textContent='보증금이 매입가와 초기비용 합계보다 커서 투입금이 없습니다. 값을 확인해 주세요.';return}
-  err.textContent='';const gy=gross/v.price*100,ny=net/inv*100;
-  $('#c_gross').textContent=gy.toFixed(1)+'%';$('#c_net').textContent=ny.toFixed(1)+'%';
-  const d=gy?((ny-gy)/gy*100):0;$('#c_delta').innerHTML=`월세÷집값으로 본 수익률보다 <b class="${d>=0?'up':''}">${d>=0?'+':''}${d.toFixed(0)}%</b> ${d>=0?'높습니다':'낮습니다'}.`;
-  const mx=Math.max(gross,1),bar=(l,val,c,neg)=>`<div class="r ${c}"><span>${l}</span><span class="t"><i style="width:${Math.max(0,Math.min(100,Math.abs(val)/mx*100))}%"></i></span><b>${neg?'−':''}${won(Math.abs(val))}</b></div>`;
-  $('#c_wf').innerHTML=bar('연 월세 수입',gross,'')+bar('공실 손실 ('+m+'개월)',loss,'neg',1)+bar('연 운영비',v.op,'neg',1)+bar('연 순수입',net,'net',net<0);
-  $('#c_inv').textContent=won(inv)}
- F.forEach(k=>{inp[k].addEventListener('input',()=>{pb.forEach((b,j)=>b.setAttribute('aria-pressed',j===2));calc()});inp[k].addEventListener('blur',()=>fmtIn(inp[k]))});
- vac.addEventListener('input',()=>{pb.forEach((b,j)=>b.setAttribute('aria-pressed',j===2));calc()});
- pb.forEach((b,i)=>b.onclick=()=>{if(i<2)load(i);else{pb.forEach((x,j)=>x.setAttribute('aria-pressed',j===2));inp.price.focus()}});
- load(0)}
 
+/* ---------- timeline toggle (phones) ---------- */
+{const t=document.getElementById('tl'),b=document.getElementById('tlmore');if(t&&b){b.onclick=()=>{const c=t.classList.toggle('collapsed');b.setAttribute('aria-expanded',!c);b.textContent=c?'전체 연혁 보기':'연혁 접기'}}}
 /* ---------- glossary ---------- */
 {const G=[['말소기준권리','낙찰로 사라지는 권리와 낙찰자가 떠안는 권리를 가르는 기준이 되는 권리입니다. 원칙적으로 이보다 뒤에 생긴 권리는 낙찰로 소멸합니다.'],
  ['대항력','임차인이 낙찰자에게 보증금 반환을 요구하며 계속 살 수 있는 힘입니다. 말소기준권리보다 먼저 전입신고와 점유를 갖춘 임차인에게 생깁니다.'],
