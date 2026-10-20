@@ -22,7 +22,7 @@
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"한국금융투자 주식회사","url":"https://kfi.ai.kr/","logo":"https://kfi.ai.kr/media/logo.png","alternateName":["KFI","Korea Financial Investment"],"foundingDate":"2025-08","email":"Bu.ko@kfi.ai.kr","founder":{"@type":"Person","name":"고병욱"},"taxID":"296-81-03776","address":{"@type":"PostalAddress","postalCode":"01411","addressRegion":"서울특별시","addressLocality":"도봉구","streetAddress":"마들로13길 84, 서울창업허브 창동 2층","addressCountry":"KR"},"description":"데이터와 AI로 주거자산의 가치를 측정하는 AI 부동산 금융 기업. AIFF(AI-Fast Finder) 개발."}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Sora:wght@300;400;600;700;800&display=swap">
+
 <style>
 /* Concept: "AI light" on white. Particles that think in shapes, pastel aurora behind frosted glass, KFI yellow as the spark. */
 :root{
@@ -724,6 +724,74 @@ footer .biz span{display:inline-block;margin-right:14px}
 .totop{position:fixed;left:calc(22px + env(safe-area-inset-left,0px));bottom:calc(22px + env(safe-area-inset-bottom,0px));z-index:79;width:46px;height:46px;border-radius:50%;border:1px solid var(--edge);background:rgba(255,255,255,.92);color:var(--ink);font-size:18px;cursor:pointer;box-shadow:0 14px 30px -16px rgba(30,40,130,.5);opacity:0;transform:translateY(10px);pointer-events:none;transition:opacity .3s,transform .3s}
 .totop.on{opacity:1;transform:none;pointer-events:auto}
 body.menu-open .totop{display:none}
+
+/* ===== DESIGN PREVIEW v4 ===== */
+@font-face{font-family:"Pretendard";src:url("fonts/PretendardVariable.woff2") format("woff2-variations");font-weight:45 920;font-display:swap}
+:root{--font:"Pretendard","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;--navy:#0d1030;--navy-2:#161a45}
+body{font-family:var(--font);letter-spacing:-.01em}
+h1,h2,h3{letter-spacing:-.025em}
+.hero h1{letter-spacing:-.035em;font-weight:800}
+.h2{font-weight:750;line-height:1.22}
+/* gradient only in hero + contact; elsewhere a quiet marker highlight */
+section:not(.contact) .h2 .grad,section .vstate .grad{background:linear-gradient(transparent 64%,rgba(237,191,7,.38) 64%,rgba(237,191,7,.38) 92%,transparent 92%);-webkit-background-clip:border-box;background-clip:border-box;color:var(--ink);animation:none;padding:0 .04em}
+.num b.grad,.bigstat .d.grad,.icard .big .grad,#c_net.grad{background:none;color:var(--ink);-webkit-text-fill-color:currentColor;animation:none}
+.num b small{color:var(--gold-ink)}
+/* eyebrow: quieter label */
+.eyebrow{background:none;border:0;padding:0;color:var(--gold-ink);letter-spacing:.14em;text-transform:uppercase;font-size:12.5px}
+.eyebrow i{box-shadow:none}
+
+/* anchor jumps: land titles below the sticky nav */
+section[id]{scroll-margin-top:calc(72px + env(safe-area-inset-top,0px))}
+section[style*="padding-top:0"]{scroll-margin-top:calc(112px + env(safe-area-inset-top,0px))}
+#vision{scroll-margin-top:calc(112px - clamp(90px,11vw,160px) + env(safe-area-inset-top,0px))}
+section.dark{scroll-margin-top:calc(112px - clamp(130px,14vw,190px) + env(safe-area-inset-top,0px))}
+/* ---------- dark bands ---------- */
+section.dark{color:var(--ink);padding-block:clamp(130px,14vw,190px)!important;position:relative}
+/* whole-page night mode: a fixed navy layer fades in while a dark section holds the middle of the screen */
+.night{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:0;transition:opacity .9s cubic-bezier(.45,0,.2,1);background:radial-gradient(900px 600px at 85% 15%,rgba(123,92,255,.25),transparent 70%),radial-gradient(700px 500px at 10% 90%,rgba(237,191,7,.10),transparent 70%),#0d1030}
+body.is-night .night{opacity:1}
+/* night mode applies to every section on screen, so neighbouring titles never sink into the navy */
+main :is(.h2,.subh h3,.lead,.note,.eyebrow,.tt b,.tt .n,.tt p,.tl5 b,.tl5 span,.tl5 .n,.vstate,.vis .lead){transition:color .9s cubic-bezier(.45,0,.2,1)}
+main .h2 .grad{transition:color .9s cubic-bezier(.45,0,.2,1),background .9s}
+body.is-night main :is(.h2,.subh h3,.vstate){color:#fff}
+body.is-night main .h2 .grad,body.is-night main .vstate .grad{color:#fff;background:linear-gradient(var(--gold),var(--gold)) left bottom/100% 5px no-repeat;padding-bottom:4px}
+body.is-night main :is(.lead,.note){color:#aeb3d6}
+body.is-night main .eyebrow{color:var(--gold)}
+body.is-night main .tt:not([aria-selected="true"]) :is(b,p){color:#e7e9f7}
+body.is-night main .tt:not([aria-selected="true"]) .n{color:#8f95c4}
+body.is-night main .tl5:not([aria-current="true"]) b{color:#fff}
+body.is-night main .tl5:not([aria-current="true"]) span{color:#aeb3d6}
+body.is-night main .glass .note,body.is-night main .glass .lead{color:var(--dim)}
+body.is-night main .glass .h2,body.is-night main .glass .subh h3{color:var(--ink)}
+section.dark .h2,section.dark .h2 .grad,section.dark .lead,section.dark .note,section.dark .eyebrow,#why .mk b,#why .mk span,#why .bigstat p,#why .bigstat .d,#why .bigstat>span:first-child{transition:color .9s cubic-bezier(.45,0,.2,1)}
+#why .mk .glass,#why .bigstat{transition:background .9s cubic-bezier(.45,0,.2,1),border-color .9s,box-shadow .9s}
+#engine #orbit text{transition:fill .9s cubic-bezier(.45,0,.2,1)}
+@media (prefers-reduced-motion:reduce){.night{transition:none}}
+section.dark.lit .h2{color:#fff}
+section.dark.lit .h2 .grad{color:#fff;background:linear-gradient(var(--gold),var(--gold)) left bottom/100% 5px no-repeat;padding-bottom:4px}
+section.dark .glass{color:var(--ink)}
+section.dark.lit .lead,section.dark.lit .note{color:#aeb3d6}
+section.dark.lit .eyebrow{color:var(--gold)}
+section.dark.lit .glass{background:rgba(255,255,255,.96);box-shadow:0 30px 70px -40px rgba(0,0,0,.6)}
+#engine.lit #orbit text{fill:#e7e9f7}
+#engine #orbit .node text:first-of-type{fill:var(--ink)}
+#engine #orbit > text{fill:var(--ink)}
+#engine #orbit > text + text{fill:#8a8fb0}
+#engine.lit #orbit .spin circle:first-child{stroke:rgba(255,255,255,.18)}
+#why.lit .mk .glass{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.12);box-shadow:none}
+#why.lit .mk b{color:#fff}#why.lit .mk span{color:#aeb3d6}
+#why.lit .bigstat{background:linear-gradient(140deg,#1d2260,#11143a);border-color:rgba(255,255,255,.12)}
+#why.lit .bigstat p{color:#c3c7e4}
+#why .bigstat .d.grad{color:var(--ink)}
+#why.lit .bigstat .d.grad{color:var(--gold)}
+#why.lit .bigstat > span:first-child{color:var(--gold)!important}
+
+
+/* ---------- line icons ---------- */
+.cap6 .orb{background:var(--navy);color:var(--gold)}
+.cap6 .orb svg{width:24px;height:24px;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;position:relative;z-index:1}
+
+
 @media (max-width:700px){
  .aurora i{filter:blur(48px);animation:none}
  .glass,.nav.solid,.orbit-chip,.fab,.chatbox,.stage .cap{backdrop-filter:none;-webkit-backdrop-filter:none}
@@ -821,18 +889,18 @@ body.menu-open .totop{display:none}
       <div class="stack rv" id="stack" aria-hidden="true"><span class="lift"></span></div>
     </div>
     <div class="caps">
-      <article class="glass cap6 spot rv"><span class="orb">📄</span><small>Document AI</small><h3>문서를 읽는 AI</h3><p>OCR과 LLM 추론으로 등기부·매각물건명세서·감정평가서를 끝까지 읽고 권리관계를 구조화합니다.</p></article>
-      <article class="glass cap6 spot rv"><span class="orb">🛰</span><small>Multimodal Location AI</small><h3>현장을 보는 AI</h3><p>텍스트·지도·이미지를 함께 이해해 로드뷰, 지적도, 실제 보행 경로와 경사까지 입지를 인식합니다.</p></article>
-      <article class="glass cap6 spot rv"><span class="orb">⚖</span><small>Explainable Risk AI</small><h3>위험을 계산하는 AI</h3><p>막연한 권리·명도 위험을 기간과 비용으로 환산하고, 왜 그런 판단인지 근거와 함께 설명합니다.</p></article>
-      <article class="glass cap6 spot rv"><span class="orb">📈</span><small>Simulation Engine</small><h3>미래를 시뮬레이션하는 AI</h3><p>DCF 현금흐름, 몬테카를로 시나리오, 낙찰확률 분포로 수익과 입찰전략을 미리 계산합니다.</p></article>
-      <article class="glass cap6 spot rv"><span class="orb">🧠</span><small>Learning Loop</small><h3>스스로 배우는 AI</h3><p>Knowledge Graph와 Vector DB에 쌓인 시장 데이터로 강화학습과 파인튜닝을 반복하며 정확도를 높입니다.</p></article>
-      <article class="glass cap6 spot rv"><span class="orb">🛡</span><small>Trust &amp; Compliance</small><h3>신뢰를 지키는 AI</h3><p>위조문서 탐지와 AML/KYC 검증으로 분석에 쓰이는 데이터와 자금 흐름의 신뢰성을 지킵니다.</p></article>
+      <article class="glass cap6 spot rv"><span class="orb"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h7l4 4v14H7z"/><path d="M14 3v4h4"/><path d="M10 12h5M10 15.5h5"/></svg></span><small>Document AI</small><h3>문서를 읽는 AI</h3><p>OCR과 LLM 추론으로 등기부·매각물건명세서·감정평가서를 끝까지 읽고 권리관계를 구조화합니다.</p></article>
+      <article class="glass cap6 spot rv"><span class="orb"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-6-5.4-6-10a6 6 0 1 1 12 0c0 4.6-6 10-6 10z"/><circle cx="12" cy="11" r="2.3"/></svg></span><small>Multimodal Location AI</small><h3>현장을 보는 AI</h3><p>텍스트·지도·이미지를 함께 이해해 로드뷰, 지적도, 실제 보행 경로와 경사까지 입지를 인식합니다.</p></article>
+      <article class="glass cap6 spot rv"><span class="orb"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v16M7 20h10"/><path d="M5 8h14"/><path d="M5 8l-2.5 6h5zM19 8l-2.5 6h5z"/></svg></span><small>Explainable Risk AI</small><h3>위험을 계산하는 AI</h3><p>막연한 권리·명도 위험을 기간과 비용으로 환산하고, 왜 그런 판단인지 근거와 함께 설명합니다.</p></article>
+      <article class="glass cap6 spot rv"><span class="orb"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19h16"/><path d="M5 15l4-4 3 3 6-7"/><path d="M15 7h3v3"/></svg></span><small>Simulation Engine</small><h3>미래를 시뮬레이션하는 AI</h3><p>DCF 현금흐름, 몬테카를로 시나리오, 낙찰확률 분포로 수익과 입찰전략을 미리 계산합니다.</p></article>
+      <article class="glass cap6 spot rv"><span class="orb"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="6" cy="7" r="2"/><circle cx="18" cy="7" r="2"/><circle cx="12" cy="17" r="2"/><circle cx="12" cy="10" r="1.6"/><path d="M7.6 8.2l3 1.2M16.4 8.2l-3 1.2M12 11.6v3.4"/></svg></span><small>Learning Loop</small><h3>스스로 배우는 AI</h3><p>Knowledge Graph와 Vector DB에 쌓인 시장 데이터로 강화학습과 파인튜닝을 반복하며 정확도를 높입니다.</p></article>
+      <article class="glass cap6 spot rv"><span class="orb"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6z"/><path d="M9 12l2 2 4-4"/></svg></span><small>Trust &amp; Compliance</small><h3>신뢰를 지키는 AI</h3><p>위조문서 탐지와 AML/KYC 검증으로 분석에 쓰이는 데이터와 자금 흐름의 신뢰성을 지킵니다.</p></article>
     </div>
     <div class="proof rv"><span><i></i>서울대학교 R&amp;D 연구소</span><span><i></i>감정평가법인·회계법인 교차 검증</span><span><i></i>금융위원회 D-테스트베드 선정</span></div>
   </div>
 </section>
 
-<section id="engine" style="padding-top:0">
+<section id="engine" class="dark">
   <div class="wrap">
     <div class="head rv">
       <span class="eyebrow"><i></i>AIFF Engine</span>
@@ -936,7 +1004,7 @@ body.menu-open .totop{display:none}
   </div>
 </section>
 
-<section id="why" style="padding-top:0">
+<section id="why" class="dark">
   <div class="wrap">
     <div class="head rv"><span class="eyebrow"><i></i>Why KFI</span><h2 class="h2">경매는 쏟아지는데,<br><span class="grad">가치의 기준은 없습니다.</span></h2></div>
     <div class="why">
@@ -1417,6 +1485,15 @@ welcome();
  t.onclick=()=>{scrollTo({top:0,behavior:RM?'auto':'smooth'});$('#nav .logo').focus({preventScroll:true})}}
 
 
+/* ---------- night mode while dark sections are in view ---------- */
+{const ds=[...document.querySelectorAll('section.dark')];const nt=document.createElement('div');nt.className='night';nt.setAttribute('aria-hidden','true');
+ document.querySelector('.aurora').after(nt);let on=null;
+ const up=()=>{const vh=innerHeight;let hit=null;
+  ds.forEach(sec=>{const r=sec.getBoundingClientRect();
+   const inside=on===sec?(r.top<vh*.62&&r.bottom>vh*.38):(r.top<vh*.5&&r.bottom>vh*.5);
+   if(inside)hit=sec});
+  if(hit!==on){on=hit;ds.forEach(sec=>sec.classList.toggle('lit',sec===on));document.body.classList.toggle('is-night',!!on)}};
+ let tk=false;addEventListener('scroll',()=>{if(!tk){tk=true;requestAnimationFrame(()=>{tk=false;up()})}},{passive:true});addEventListener('resize',up);up()}
 /* analytics events */
 {const ev=(n,p)=>{try{if(window.gtag)gtag('event',n,p||{})}catch(_){}};
  document.addEventListener('click',e=>{const a=e.target.closest&&e.target.closest('a,button');if(!a)return;
