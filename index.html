@@ -1465,6 +1465,23 @@ welcome();
  t.onclick=()=>{scrollTo({top:0,behavior:RM?'auto':'smooth'});$('#nav .logo').focus({preventScroll:true})}}
 
 
+/* ---------- section dwell tracking (GA4) ---------- */
+{const ev=(n,p)=>{try{if(window.gtag)gtag('event',n,p)}catch(_){}};
+ const NAMES={top:'히어로',vision:'비전·미션',tech:'핵심 기술',engine:'AIFF 엔진',tour:'미리보기',insight:'인사이트',why:'시장',who:'고객',media:'미디어룸',company:'회사',faq:'FAQ',contact:'문의하기'};
+ const secs=Object.keys(NAMES).map(id=>document.getElementById(id)).filter(Boolean);
+ const acc={},seen={};let cur=null,t0=performance.now();
+ const flush=()=>{if(cur){acc[cur]=(acc[cur]||0)+(performance.now()-t0)}t0=performance.now()};
+ const pick=()=>{const mid=innerHeight*.5;let hit=null;for(const s of secs){const r=s.getBoundingClientRect();if(r.top<=mid&&r.bottom>mid){hit=s.id;break}}
+  if(hit!==cur){flush();cur=hit;if(hit&&!seen[hit]){seen[hit]=1;ev('section_view',{section_id:hit,section_name:NAMES[hit]})}}};
+ let tk=false;addEventListener('scroll',()=>{if(!tk){tk=true;requestAnimationFrame(()=>{tk=false;pick()})}},{passive:true});pick();
+ /* scroll depth 25/50/75/100 */
+ const marks={};addEventListener('scroll',()=>{const h=document.documentElement.scrollHeight-innerHeight;if(h<=0)return;const p=scrollY/h*100;
+  for(const m of [25,50,75,100])if(p>=m-1&&!marks[m]){marks[m]=1;ev('scroll_depth',{percent:m})}},{passive:true});
+ /* send dwell per section when the visitor leaves or hides the tab */
+ let sent=false;const send=()=>{flush();for(const id in acc){const sec=Math.round(acc[id]/1000);if(sec>=2)ev('section_dwell',{section_id:id,section_name:NAMES[id],dwell_seconds:sec,transport_type:'beacon'})}
+  for(const k in acc)delete acc[k]};
+ document.addEventListener('visibilitychange',()=>{if(document.hidden)send();else t0=performance.now()});
+ addEventListener('pagehide',send);}
 /* analytics events */
 {const ev=(n,p)=>{try{if(window.gtag)gtag('event',n,p||{})}catch(_){}};
  document.addEventListener('click',e=>{const a=e.target.closest&&e.target.closest('a,button');if(!a)return;
