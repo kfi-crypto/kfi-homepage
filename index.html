@@ -841,6 +841,71 @@ body.fx-cursor .cursorlight.on{opacity:1}
  .tl5 span:not(.n){display:none}
 }
 @media (max-width:560px){.steps4{display:grid;grid-template-columns:1fr 1fr;gap:10px 12px}.steps4 li+li::before{display:none}}
+
+/* ===== product tour v2 : big stage, browser frame, AI focus + floating callouts ===== */
+.tour2{display:grid;gap:clamp(18px,2.4vw,28px);margin-top:clamp(8px,1.5vw,16px)}
+.ttabs{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px;padding:6px;border-radius:20px;background:rgba(255,255,255,.7);border:1px solid var(--edge);box-shadow:0 10px 30px -22px rgba(30,40,130,.35);backdrop-filter:blur(10px)}
+.ttabs .tt{all:unset;cursor:pointer;position:relative;display:flex;align-items:center;justify-content:center;gap:10px;padding:14px 12px;border-radius:14px;overflow:hidden;transition:background .3s,color .3s;white-space:nowrap}
+.ttabs .tt .n{font-size:12px;font-weight:800;color:var(--dim);letter-spacing:.04em}
+.ttabs .tt b{font-size:15.5px;font-weight:700;color:var(--muted)}
+.ttabs .tt .bar{position:absolute;left:12px;right:auto;bottom:6px;height:2px;width:0;max-width:calc(100% - 24px);border-radius:2px;background:linear-gradient(90deg,var(--gold),var(--violet))}
+.ttabs .tt[aria-selected="true"]{background:#fff;box-shadow:0 6px 18px -10px rgba(30,40,130,.45)}
+.ttabs .tt[aria-selected="true"] b{color:var(--ink)}
+.ttabs .tt[aria-selected="true"] .n{color:var(--gold-ink)}
+.ttabs .tt:hover b{color:var(--ink)}
+.ttabs .tt:focus-visible{outline:2px solid var(--blue);outline-offset:-2px}
+.tstage{position:relative;perspective:2000px;padding:0 clamp(0px,3vw,48px)}
+.tglow{position:absolute;inset:8% 6% -4%;border-radius:40px;background:radial-gradient(60% 60% at 25% 30%,rgba(237,191,7,.35),transparent 70%),radial-gradient(60% 60% at 80% 70%,rgba(123,92,255,.32),transparent 70%),radial-gradient(50% 50% at 60% 20%,rgba(61,107,255,.22),transparent 70%);filter:blur(50px);z-index:0;pointer-events:none}
+.tdev{position:relative;z-index:1;margin:0;border-radius:18px;background:#fff;border:1px solid rgba(24,30,90,.12);box-shadow:0 2px 0 rgba(255,255,255,.8) inset,0 50px 100px -40px rgba(20,24,80,.45),0 18px 40px -24px rgba(20,24,80,.3);overflow:hidden;transform:rotateX(9deg) scale(.96);transform-origin:50% 100%;transition:transform 1.2s cubic-bezier(.2,.7,.2,1)}
+.tstage.in .tdev{transform:none}
+.tchrome{display:flex;align-items:center;gap:14px;padding:11px 16px;background:linear-gradient(#fbfbfe,#f3f4fa);border-bottom:1px solid rgba(24,30,90,.08)}
+.tchrome .tl{display:flex;gap:7px}.tchrome .tl i{width:11px;height:11px;border-radius:50%;background:#ff5f57}.tchrome .tl i+i{background:#febc2e}.tchrome .tl i+i+i{background:#28c840}
+.turl{flex:1;min-width:0;max-width:520px;margin:0 auto;display:flex;align-items:center;gap:7px;padding:7px 14px;border-radius:10px;background:#fff;border:1px solid rgba(24,30,90,.08);font-size:12.5px;font-weight:600;color:var(--ink);white-space:nowrap;overflow:hidden}
+.turl svg{width:12px;height:12px;color:var(--mint);flex:none}
+.turl em{font-style:normal;font-weight:500;color:var(--dim);overflow:hidden;text-overflow:ellipsis}
+.tdone{display:inline-flex;align-items:center;gap:7px;font-size:12px;font-weight:700;color:#0b7d5c;background:rgba(15,167,122,.1);padding:6px 11px;border-radius:999px;white-space:nowrap}
+.tdone i{width:7px;height:7px;border-radius:50%;background:var(--mint);box-shadow:0 0 0 0 rgba(15,167,122,.5);animation:tping 1.8s infinite}
+@keyframes tping{70%{box-shadow:0 0 0 7px rgba(15,167,122,0)}100%{box-shadow:0 0 0 0 rgba(15,167,122,0)}}
+.tview{position:relative;aspect-ratio:16/10;overflow:hidden;background:#f5f6fb;cursor:zoom-in}
+.tcam{position:absolute;inset:0;transition:transform .5s ease}
+.tcam.go{animation:tcam 7s cubic-bezier(.45,0,.25,1) forwards}
+@keyframes tcam{0%,18%{transform:scale(1)}55%,100%{transform:scale(1.16)}}
+.tcam img{width:100%;height:100%;object-fit:cover;display:block;transition:opacity .3s,filter .3s}
+.tcam img.out{opacity:.1;filter:blur(8px)}
+.tfocus{position:absolute;border-radius:12px;border:2px solid var(--gold);box-shadow:0 0 0 9999px rgba(13,16,48,0),0 0 24px rgba(237,191,7,.55);opacity:0;transform:scale(1.08);transition:opacity .5s,transform .6s cubic-bezier(.2,.8,.2,1),box-shadow .8s}
+.tfocus.on{opacity:1;transform:none;box-shadow:0 0 0 9999px rgba(13,16,48,.18),0 0 26px rgba(237,191,7,.6)}
+.tfocus.on::after{content:"AI";position:absolute;top:-11px;left:12px;font-size:10px;font-weight:800;letter-spacing:.08em;color:#15120a;background:var(--gold);padding:3px 7px;border-radius:6px}
+.tzoom{position:absolute;right:14px;bottom:14px;z-index:3}
+.tcall{position:absolute;z-index:2;min-width:210px;max-width:260px;padding:16px 18px;border-radius:18px;background:rgba(255,255,255,.86);backdrop-filter:blur(14px) saturate(1.4);border:1px solid rgba(255,255,255,.9);box-shadow:0 30px 60px -28px rgba(20,24,80,.5),0 0 0 1px rgba(24,30,90,.06);display:grid;gap:4px;opacity:0;transform:translateY(16px) scale(.96);transition:opacity .5s,transform .6s cubic-bezier(.2,.8,.2,1);pointer-events:none}
+.tcall.on{opacity:1;transform:none}
+.tcall small{font-size:12px;font-weight:600;color:var(--muted)}
+.tcall b{font-size:clamp(22px,2.2vw,28px);font-weight:800;letter-spacing:-.02em;line-height:1.15;background:linear-gradient(100deg,var(--ink) 20%,#3d4fd6 70%,var(--violet));-webkit-background-clip:text;background-clip:text;color:transparent}
+.tcall span{font-size:12.5px;color:var(--dim)}
+.tcall.l{left:0;bottom:12%}
+.tcall.r{right:0;top:16%}
+.tcall.l::before,.tcall.r::before{content:"";position:absolute;top:18px;width:4px;height:28px;border-radius:4px;background:linear-gradient(var(--gold),var(--violet))}
+.tcall.l::before{left:-1px}.tcall.r::before{left:-1px}
+.tinfo{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;padding:0 clamp(0px,3vw,48px)}
+.tinfo>div:first-child{max-width:640px}
+.tstep{font-size:12.5px;font-weight:800;letter-spacing:.08em;color:var(--gold-ink)}
+.tinfo h3{margin:6px 0 6px;font-size:clamp(20px,2vw,24px)}
+.tinfo p{margin:0;color:var(--muted);font-size:15px;line-height:1.65}
+.tside{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.tout{font-size:14px;font-weight:700;color:#2a4bc4;background:rgba(61,107,255,.08);padding:10px 14px;border-radius:12px}
+@media (max-width:900px){
+ .ttabs{display:flex;overflow-x:auto;scrollbar-width:none;-webkit-mask-image:linear-gradient(90deg,#000 85%,transparent);mask-image:linear-gradient(90deg,#000 85%,transparent)}
+ .ttabs::-webkit-scrollbar{display:none}
+ .ttabs .tt{flex:none;padding:12px 14px}
+ .tstage{padding:0;display:grid;grid-template-columns:1fr 1fr;gap:12px 10px}
+ .tglow,.tdev{grid-column:1/-1}
+ .tdev{transform:none}
+ .tcall,.tcall.l,.tcall.r{position:relative;inset:auto;min-width:0;max-width:none;padding:13px 14px;border-radius:14px}
+ .tcall b{font-size:19px}
+ .tchrome .tl,.tdone{display:none}
+ .turl{max-width:none;margin:0}
+ .tinfo{padding:0}
+}
+@media (prefers-reduced-motion:reduce){.tdev{transform:none;transition:none}.tcam.go{animation:none}.tcall,.tfocus{transition:none}}
 @media (max-width:700px){
  .aurora i{filter:blur(48px);animation:none}
  .glass,.nav.solid,.orbit-chip,.fab,.chatbox,.stage .cap{backdrop-filter:none;-webkit-backdrop-filter:none}
@@ -975,13 +1040,18 @@ body.fx-cursor .cursorlight.on{opacity:1}
       <h2 class="h2">AIFF의<br><span class="grad">실제 분석 화면</span></h2>
       <p class="lead">AIFF 분석 시스템의 핵심 화면입니다. 서류를 읽고, 현장을 보고, 목적에 맞춰 수익을 계산하고, 입찰가와 순위까지 하나의 화면 흐름으로 이어집니다.</p>
     </div>
-    <div class="tour">
-      <div class="tlist2 rv" role="tablist" aria-label="AIFF 핵심 화면" id="tlist2"></div>
-      <figure class="glass tscreen rv">
-        <div class="tbar"><i></i><i></i><i></i><span id="tcap">AIFF · 권리 분석</span><span class="live">● AIFF</span></div>
-        <div class="tvid"><img id="timg" src="media/app-1.webp" alt="AIFF 권리·명도 분석 화면" width="2000" height="1250"><div class="tscan" aria-hidden="true"></div><button type="button" class="tzoom" id="tzoom">⤢ 크게 보기</button></div>
-        <figcaption class="tfoot"><div class="tprog"><i id="tprog"></i></div><div class="tmeta"><span id="tout"></span><a class="btn gold" href="http://www.kfi.finance" target="_blank" rel="noopener">AIFF 분석 시스템 열기 <span class="ext">↗</span></a></div></figcaption>
-      </figure>
+    <div class="tour2">
+      <div class="ttabs rv" role="tablist" aria-label="AIFF 핵심 화면" id="tlist2"></div>
+      <div class="tstage rv">
+        <div class="tglow" aria-hidden="true"></div>
+        <figure class="tdev">
+          <div class="tchrome"><span class="tl"><i></i><i></i><i></i></span><span class="turl"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4.5 7V5a3.5 3.5 0 0 1 7 0v2" fill="none" stroke="currentColor" stroke-width="1.5"/><rect x="3" y="7" width="10" height="7" rx="2" fill="currentColor"/></svg>kfi.finance<em id="tpath">/ 물건 분석 / 권리·명도</em></span><span class="tdone" id="tdone"><i></i>AI 분석 완료 · 3.0초</span></div>
+          <div class="tview" id="tview"><div class="tcam" id="tcam"><img id="timg" src="media/app-1.webp" alt="AIFF 권리·명도 분석 화면" width="2000" height="1250"><span class="tfocus" id="tfocus" aria-hidden="true"></span></div><button type="button" class="tzoom" id="tzoom">⤢ 원본 크게 보기</button></div>
+        </figure>
+        <div class="tcall l" id="tcallA" aria-hidden="true"></div>
+        <div class="tcall r" id="tcallB" aria-hidden="true"></div>
+      </div>
+      <div class="tinfo rv"><div><span class="tstep" id="tstep">01 / 05</span><h3 id="tttl">권리·명도 분석</h3><p id="tdesc"></p></div><div class="tside"><span class="tout" id="tout"></span><a class="btn gold" href="http://www.kfi.finance" target="_blank" rel="noopener">AIFF 분석 시스템 열기 <span class="ext">↗</span></a></div></div>
     </div>
     <p class="note" style="margin-top:12px">AIFF 분석 화면 예시 · 시연용 가상 데이터</p>
     <p class="disc"><b>안내</b><span>AIFF의 분석 결과(적정·부적정 판정, 추천 입찰 구간, 낙찰확률, 수익률 등)는 투자 판단을 돕는 참고 정보이며 특정 물건의 매수·입찰을 권유하지 않습니다. 실제 권리관계와 현장 상황은 반드시 직접 확인하시고, 투자 결정과 그 결과에 대한 책임은 이용자 본인에게 있습니다.</span></p>
@@ -1327,25 +1397,37 @@ sel(0);if(!RM)setInterval(()=>{if(!u)sel((c+1)%5)},2600);
 /* ---------- PRODUCT TOUR ---------- */
 const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const TOUR=[
- {v:'rights',t:'권리·명도 분석',c:'AIFF · 권리 분석',d:'등기부·매각물건명세서·현황조사서를 AI가 동시에 읽고, 낙찰자가 떠안을 권리와 임차인 위험을 찾아냅니다.',o:'→ 서류 12건 판독 · 인수 보증금 0원'},
- {v:'location',t:'맞춤형 입지분석',c:'AIFF · 맞춤형 입지분석',d:'지도 위 직선거리가 아니라 실제 걷는 길과 경사까지 계산해, 사는 사람의 기준으로 입지를 다시 평가합니다.',o:'→ 도보 780m · 경사 12% 반영'},
- {v:'profit',t:'맞춤형 수지분석',c:'AIFF · 맞춤형 수지분석',d:'총투자원가와 자금조달부터 10년 현금흐름, 수익성, 민감도까지 한 화면에서 판정합니다. 투자 목적을 바꾸면 기준이 함께 바뀝니다.',o:'→ Equity IRR 26.8% · 목표 12% 충족 · 적정'},
- {v:'bid',t:'입찰전략',c:'AIFF · 입찰전략',d:'낙찰확률과 수익을 함께 시뮬레이션해, 안전하면서 목표 수익을 지키는 입찰 구간을 제시합니다.',o:'→ R 2.49억 ~ M 2.83억 · 낙찰확률 27%→55%'},
- {v:'rank',t:'맞춤 순위·리포트',c:'AIFF · 맞춤 순위',d:'같은 집 5채라도 사람마다 1위가 다릅니다. 목적별로 순위를 다시 매기고 투자심사 리포트를 자동으로 만듭니다.',o:'→ 가족 기준 5위가 10년 투자 1위로'}];
-{const L=$('#tlist2'),I=$('#timg');let cur=0,user=false,t0=performance.now(),raf=0;const DUR=6500;
- TOUR.forEach((t,i)=>{const pre=new Image();pre.src='media/app-'+(i+1)+'.webp';const b=document.createElement('button');b.type='button';b.className='tt';b.id='tt'+i;b.setAttribute('role','tab');b.setAttribute('aria-controls','timg');
-  b.innerHTML=`<span class="n">0${i+1}</span><b>${t.t}</b><p>${t.d}</p><span class="bar"></span>`;b.onclick=()=>{user=true;sel(i)};
-  b.onkeydown=e=>{if(/Down|Right/.test(e.key)){e.preventDefault();user=true;sel((i+1)%5,1)}if(/Up|Left/.test(e.key)){e.preventDefault();user=true;sel((i+4)%5,1)}};L.appendChild(b)});
- function sel(i,f){cur=i;t0=performance.now();TOUR.forEach((_,j)=>{const b=$('#tt'+j);b.setAttribute('aria-selected',j===i);b.tabIndex=j===i?0:-1;b.querySelector('.bar').style.width='0'});if(f)$('#tt'+i).focus();
-  const t=TOUR[i];$('#tcap').textContent=t.c;$('#tout').textContent=t.o;I.classList.add('out');
-  setTimeout(()=>{I.src='media/app-'+(i+1)+'.webp';I.alt='AIFF '+t.t+' 화면';I.classList.remove('zoom');void I.offsetWidth;if(!RM)I.classList.add('zoom');I.classList.remove('out')},RM?0:260)}
- let vis=true;if('IntersectionObserver' in window)new IntersectionObserver(es=>{vis=es[0].isIntersecting;if(vis)t0=performance.now()-(t0?0:0)},{threshold:.2}).observe(I);
- function tick(now){const k=Math.min(1,(now-t0)/DUR);$('#tprog').style.width=k*100+'%';$('#tt'+cur+' .bar').style.width=k*100+'%';
+ {t:'권리·명도 분석',p:'물건 분석 / 권리·명도',done:'AI 분석 완료 · 3.0초',d:'등기부·매각물건명세서·현황조사서를 AI가 동시에 읽고, 낙찰자가 떠안을 권리와 임차인 위험을 찾아냅니다.',o:'서류 12건 판독 · 인수 보증금 0원',
+  f:[74,21.5,24.5,27.5],z:[0,0],A:{k:'인수 권리 · 인수 보증금',v:'0건 · 0원',s:'말소기준 이후 권리 모두 소멸'},B:{k:'AI가 읽은 서류',v:'12건 · 3.0초',s:'평균 판독 신뢰도 99.3%'}},
+ {t:'맞춤형 입지분석',p:'물건 분석 / 맞춤형 입지',done:'입지 변수 152개 반영',d:'지도 위 직선거리가 아니라 실제 걷는 길과 경사까지 계산해, 사는 사람의 기준으로 입지를 다시 평가합니다.',o:'도보 780m · 경사 12% 반영',
+  f:[22,43,31,24],z:[0,0],A:{k:'실제 보행 경로',v:'780m · 경사 12%',s:'지도상 가까운 A는 오르막'},B:{k:'맞춤 입지 점수',v:'59.5 → 72.0',s:'1인 직장인 기준 · 152개 변수'}},
+ {t:'맞춤형 수지분석',p:'물건 분석 / 맞춤형 수지',done:'10년 현금흐름 산출',d:'총투자원가와 자금조달부터 10년 현금흐름, 수익성, 민감도까지 한 화면에서 판정합니다. 투자 목적을 바꾸면 기준이 함께 바뀝니다.',o:'Equity IRR 26.8% · 목표 12% 충족 · 적정',
+  f:[54.3,21.4,12.1,9.4],z:[0,0],A:{k:'Equity IRR',v:'26.8%',s:'목표 12% 충족 · 적정'},B:{k:'민감도 25개 시나리오',v:'전부 충족',s:'매입가 +10%에도 IRR 20% 이상'}},
+ {t:'입찰전략',p:'물건 분석 / 입찰전략',done:'유사 낙찰 사례 96건 학습',d:'낙찰확률과 수익을 함께 시뮬레이션해, 안전하면서 목표 수익을 지키는 입찰 구간을 제시합니다.',o:'R 2.49억 ~ M 2.83억 · 낙찰확률 27%→55%',
+  f:[29.8,27.5,11.6,28],z:[0,0],A:{k:'AI 추천 입찰 구간',v:'2.49억 ~ 2.83억',s:'목표 Equity IRR 12% 유지'},B:{k:'시뮬레이션',v:'10,000회',s:'유사 낙찰 96건 · 경쟁 4~5명 예측'}},
+ {t:'맞춤 순위·리포트',p:'관심 물건 / 맞춤 순위',done:'투자심사 리포트 자동 생성',d:'같은 집 5채라도 사람마다 1위가 다릅니다. 목적별로 순위를 다시 매기고 투자심사 리포트를 자동으로 만듭니다.',o:'가족 기준 5위가 10년 투자 1위로',
+  f:[62.5,63,35,18],z:[0,0],A:{k:'기준을 바꾸면',v:'5위 → 1위',s:'3040 가족 → 10년 장기 투자'},B:{k:'투자심사 리포트',v:'3.0초 자동 생성',s:'권리·명도·입지·수지·입찰 5개 항목'}}];
+{const L=$('#tlist2'),I=$('#timg'),cam=$('#tcam'),fo=$('#tfocus'),cA=$('#tcallA'),cB=$('#tcallB');let cur=0,user=false,t0=performance.now(),raf=0,tm=[];const DUR=7000;
+ const card=c=>`<small>${c.k}</small><b>${c.v}</b><span>${c.s}</span>`;
+ TOUR.forEach((t,i)=>{const pre=new Image();pre.src='media/app-'+(i+1)+'.webp';const b=document.createElement('button');b.type='button';b.className='tt';b.id='tt'+i;b.setAttribute('role','tab');b.setAttribute('aria-controls','tview');
+  b.innerHTML=`<span class="n">0${i+1}</span><b>${t.t}</b><span class="bar"></span>`;b.onclick=()=>{user=true;sel(i)};
+  b.onkeydown=e=>{if(/Right|Down/.test(e.key)){e.preventDefault();user=true;sel((i+1)%5,1)}if(/Left|Up/.test(e.key)){e.preventDefault();user=true;sel((i+4)%5,1)}};L.appendChild(b)});
+ function sel(i,f){cur=i;t0=performance.now();tm.forEach(clearTimeout);tm=[];
+  TOUR.forEach((_,j)=>{const b=$('#tt'+j);b.setAttribute('aria-selected',j===i);b.tabIndex=j===i?0:-1;b.querySelector('.bar').style.width='0'});
+  const tb=$('#tt'+i);if(f)tb.focus();if(L.scrollWidth>L.clientWidth)L.scrollTo({left:tb.offsetLeft-16,behavior:RM?'auto':'smooth'});
+  const t=TOUR[i];$('#tpath').textContent='/ '+t.p;$('#tdone').lastChild.textContent=t.done;$('#tstep').textContent=`0${i+1} / 05`;$('#tttl').textContent=t.t;$('#tdesc').textContent=t.d;$('#tout').textContent='→ '+t.o;
+  [cA,cB,fo].forEach(e=>e.classList.remove('on'));cam.classList.remove('go');I.classList.add('out');
+  tm.push(setTimeout(()=>{I.src='media/app-'+(i+1)+'.webp';I.alt='AIFF '+t.t+' 화면';
+   fo.style.cssText=`left:${t.f[0]}%;top:${t.f[1]}%;width:${t.f[2]}%;height:${t.f[3]}%`;const K=1.16,org=(a,w)=>{let o=a+w/2;const lo=o+(a-o)*K,hi=o+(a+w-o)*K;if(hi>97)o=(97-(a+w)*K)/(1-K);else if(lo<3)o=(3-a*K)/(1-K);return Math.max(0,Math.min(100,o))};cam.style.transformOrigin=`${org(t.f[0],t.f[2])}% ${org(t.f[1],t.f[3])}%`;
+   cA.innerHTML=card(t.A);cB.innerHTML=card(t.B);I.classList.remove('out');void cam.offsetWidth;
+   if(!RM)cam.classList.add('go');tm.push(setTimeout(()=>fo.classList.add('on'),RM?0:700),setTimeout(()=>cA.classList.add('on'),RM?0:1100),setTimeout(()=>cB.classList.add('on'),RM?0:1500))},RM?0:280))}
+ let vis=true;if('IntersectionObserver' in window)new IntersectionObserver(es=>{vis=es[0].isIntersecting},{threshold:.25}).observe($('#tview'));
+ function tick(now){const k=Math.min(1,(now-t0)/DUR);$('#tt'+cur+' .bar').style.width=k*100+'%';
   if(k>=1&&!user&&vis&&!RM)sel((cur+1)%5);raf=requestAnimationFrame(tick)}
  sel(0);raf=requestAnimationFrame(tick)}
 {const lb=document.createElement('div');lb.className='lbox';lb.hidden=true;lb.setAttribute('role','dialog');lb.setAttribute('aria-label','분석 화면 크게 보기');lb.innerHTML='<img alt=""><button type="button" aria-label="닫기">×</button>';document.body.appendChild(lb);
  const open=()=>{const im=$('#timg');lb.querySelector('img').src=im.src;lb.querySelector('img').alt=im.alt;lb.hidden=false;lb.querySelector('button').focus()};const close=()=>{lb.hidden=true;$('#tzoom').focus()};
- $('#tzoom').onclick=e=>{e.stopPropagation();open()};$('#timg').onclick=open;lb.onclick=close;addEventListener('keydown',e=>{if(e.key==='Escape'&&!lb.hidden)close()})}
+ $('#tzoom').onclick=e=>{e.stopPropagation();open()};$('#tview').onclick=open;lb.onclick=close;addEventListener('keydown',e=>{if(e.key==='Escape'&&!lb.hidden)close()})}
 function setMode(){$('#chatMode').textContent=sample?'실시간 AI · 페이지 안내 연동':'시연 모드 · 준비된 답변'}
 
 /* counters */
