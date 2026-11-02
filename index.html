@@ -113,7 +113,7 @@ main,nav,footer{position:relative;z-index:1}
 @media (max-width:420px){.stage .cap button{padding:5px 8px;font-size:11.5px}}
 
 .marq{overflow:hidden;padding-block:26px;border-block:1px solid var(--edge);background:rgba(255,255,255,.5);-webkit-mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent);mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent)}
-.marq .tr{display:flex;gap:56px;width:max-content;animation:mq 80s linear infinite;align-items:center}
+.marq .tr{display:flex;gap:56px;width:max-content;animation:mq 74s linear infinite;align-items:center}
 .marq span{font-size:clamp(18px,2vw,24px);font-weight:600;color:var(--dim);white-space:nowrap}
 .marq span b{color:var(--ink)}
 .marq .dot{width:8px;height:8px;border-radius:50%;background:linear-gradient(var(--gold),var(--violet))}
@@ -1322,7 +1322,7 @@ if(RM){setShape(3);P.forEach((p,i)=>{const t=SH[3][i];p.x=t[0];p.y=t[1];p.z=t[2]
 }
 
 /* marquee */
-const MQ=['<b>우수상</b> 2026 테크브릿지 데모데이','<b>D-테스트베드</b> 금융위원회 선정','<b>최우수</b> 중기부 모두의 창업','<b>NEST 기업</b> 신용보증기금 선정','<b>FGP 3기</b> SBA X 퍼스트게이트 선정','<b>K-Global</b> 과기정통부 ICT 지원사업 선정','<b>3초</b> 물건당 AI 분석','<b>70~80%</b> 검토 대상 자동 축소','<b>150여 개</b> 입지 변수','<b>15종 이상</b> 등기부·감정평가서 등 문서 자동 판독','<b>98%</b> AI 스코어링 정확도(과거 10년 데이터 기준)','<b>자기진화형</b> AI 엔진','<b>서울대학교</b> R&amp;D 연구소','<b>10년</b> 현금흐름 시뮬레이션'];
+const MQ=['<b>우수상</b> 2026 테크브릿지 데모데이','<b>D-테스트베드</b> 금융위원회 선정','<b>최우수</b> 중기부 모두의 창업','<b>NEST 기업</b> 신용보증기금 선정','<b>FGP 3기</b> SBA X 퍼스트게이트 선정','<b>K-Global</b> 과기정통부 ICT 지원사업 선정','<b>3초</b> 물건당 AI 분석','<b>70~80%</b> 검토 대상 자동 축소','<b>150여 개</b> 입지 변수','<b>98%</b> AI 스코어링 정확도(과거 10년 데이터 기준)','<b>자기진화형</b> AI 엔진','<b>서울대학교</b> R&amp;D 연구소','<b>10년</b> 현금흐름 시뮬레이션'];
 const mh=MQ.map(t=>`<span>${t}</span><i class="dot"></i>`).join('');$('#mq').innerHTML=mh+mh;
 
 /* ---------- ENGINE ORBIT ---------- */
