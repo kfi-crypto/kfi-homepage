@@ -1632,7 +1632,7 @@ welcome();
    if(k==='flow'&&!on){['--a1','--a2','--a3','--ay'].forEach(v=>B.style.removeProperty(v))}}})}
 
 /* media room filter */
-{const ul=$('#plist');if(ul){[...ul.querySelectorAll('.prow')].sort((a,b)=>(b.querySelector('time')?.textContent||'').localeCompare(a.querySelector('time')?.textContent||'')).forEach(r=>ul.appendChild(r));{const tabs=document.querySelector('.ptabs'),last=f=>ul.querySelector('.prow[data-cat="'+f+'"] time')?.textContent||'';[...tabs.querySelectorAll('.chip:not([data-f=all])')].sort((a,b)=>last(b.dataset.f).localeCompare(last(a.dataset.f))).forEach(c=>tabs.appendChild(c))}const feat=document.querySelector('.pfeat');const PER=6,pg=$('#pager'),pc=$('#pcount');let F='all',P=0;
+{const ul=$('#plist');if(ul){[...ul.querySelectorAll('.prow')].sort((a,b)=>(b.querySelector('time')?.textContent||'').localeCompare(a.querySelector('time')?.textContent||'')).forEach(r=>ul.appendChild(r));{const tabs=document.querySelector('.ptabs'),last=f=>ul.querySelector('.prow[data-cat="'+f+'"] time')?.textContent||'';[...tabs.querySelectorAll('.chip:not([data-f=all])')].sort((a,b)=>last(b.dataset.f).localeCompare(last(a.dataset.f))).forEach(c=>tabs.appendChild(c))}const feat=document.querySelector('.pfeat');const PER=8,pg=$('#pager'),pc=$('#pcount');let F='all',P=0;
  function draw(){const rows=[...ul.querySelectorAll('.prow')],on=rows.filter(r=>F==='all'||r.dataset.cat===F),n=Math.max(1,Math.ceil(on.length/PER));P=Math.min(P,n-1);
   rows.forEach(r=>r.hidden=true);on.slice(P*PER,P*PER+PER).forEach(r=>r.hidden=false);
   pc.textContent=`최신순 · 총 ${on.length}건`;
