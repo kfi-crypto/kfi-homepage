@@ -21,8 +21,7 @@
 <link rel="canonical" href="https://kfi.ai.kr/">
 <meta name="twitter:card" content="summary_large_image">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"한국금융투자 주식회사","legalName":"한국금융투자 주식회사","url":"https://kfi.ai.kr/","logo":"https://kfi.ai.kr/media/logo.png","alternateName":["KFI","Korea Financial Investment"],"foundingDate":"2025-08","email":"Bu.ko@kfi.ai.kr","founder":{"@type":"Person","name":"고병욱"},"taxID":"296-81-03776","address":{"@type":"PostalAddress","postalCode":"01411","addressRegion":"서울특별시","addressLocality":"도봉구","streetAddress":"마들로13길 84, 서울창업허브 창동 2층","addressCountry":"KR"},"description":"데이터와 AI로 주거자산의 가치를 측정하는 AI 부동산 금융 기업. AIFF(AI-Fast Finder) 개발."}</script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" href="fonts/Pretendard-kfi.woff2" as="font" type="font/woff2" crossorigin>
 
 <style>
 /* Concept: "AI light" on white. Particles that think in shapes, pastel aurora behind frosted glass, KFI yellow as the spark. */
@@ -728,8 +727,8 @@ footer .biz span{display:inline-block;margin-right:14px}
 body.menu-open .totop{display:none}
 
 /* ===== DESIGN PREVIEW v4 ===== */
-@font-face{font-family:"Pretendard";src:url("fonts/PretendardVariable.woff2") format("woff2-variations");font-weight:45 920;font-display:swap}
-:root{--font:"Pretendard","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;--navy:#0d1030;--navy-2:#161a45}
+@font-face{font-family:"Pretendard";src:url("fonts/Pretendard-kfi.woff2") format("woff2-variations");font-weight:45 920;font-display:swap}@font-face{font-family:"Pretendard Ext";src:url("fonts/Pretendard-ext.woff2") format("woff2-variations");font-weight:45 920;font-display:swap;unicode-range:U+1100-11FF,U+3130-318F,U+AC00-D7A3}
+:root{--font:"Pretendard","Pretendard Ext","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;--navy:#0d1030;--navy-2:#161a45}
 body{font-family:var(--font);letter-spacing:-.01em}
 h1,h2,h3{letter-spacing:-.025em}
 .hero h1{letter-spacing:-.035em;font-weight:800}
@@ -849,7 +848,7 @@ body.fx-cursor .cursorlight.on{opacity:1}
 .ttabs .tt{all:unset;cursor:pointer;position:relative;display:flex;align-items:center;justify-content:center;gap:10px;padding:14px 12px;border-radius:14px;overflow:hidden;transition:background .3s,color .3s;white-space:nowrap}
 .ttabs .tt .n{font-size:12px;font-weight:800;color:var(--dim);letter-spacing:.04em}
 .ttabs .tt b{font-size:15.5px;font-weight:700;color:var(--muted)}
-.ttabs .tt .bar{position:absolute;left:12px;right:auto;bottom:6px;height:2px;width:0;max-width:calc(100% - 24px);border-radius:2px;background:linear-gradient(90deg,var(--gold),var(--violet))}
+.ttabs .tt .bar{position:absolute;left:12px;right:auto;bottom:6px;height:2px;width:calc(100% - 24px);transform:scaleX(0);transform-origin:left;will-change:transform;border-radius:2px;background:linear-gradient(90deg,var(--gold),var(--violet))}
 .ttabs .tt[aria-selected="true"]{background:#fff;box-shadow:0 6px 18px -10px rgba(30,40,130,.45)}
 .ttabs .tt[aria-selected="true"] b{color:var(--ink)}
 .ttabs .tt[aria-selected="true"] .n{color:var(--gold-ink)}
@@ -913,6 +912,7 @@ body.fx-cursor .cursorlight.on{opacity:1}
  .glass{background:rgba(255,255,255,.93)}
  .icard .img img,.detail .img img{animation:none}
 }
+section[id]:not(#top):not(#vision){contain-intrinsic-size:auto 1000px}html:not(.cvoff) section[id]:not(#top):not(#vision){content-visibility:auto}
 </style>
 </head>
 <body>
@@ -922,7 +922,7 @@ body.fx-cursor .cursorlight.on{opacity:1}
 <div class="progress" aria-hidden="true"><i id="prog"></i></div>
 <nav class="nav" id="nav" aria-label="주 메뉴">
   <div class="wrap">
-    <a class="logo" href="#top" aria-label="KFI 한국금융투자 홈"><img src="media/logo.png" alt="KFI 한국금융투자" width="885" height="205"></a>
+    <a class="logo" href="#top" aria-label="KFI 한국금융투자 홈"><img src="media/logo.webp" alt="KFI 한국금융투자" width="540" height="125" fetchpriority="high"></a>
     <ul>
       <li><a href="#vision">비전·미션</a></li>
       <li><a href="#tech">핵심 기술</a></li>
@@ -1121,8 +1121,8 @@ body.fx-cursor .cursorlight.on{opacity:1}
     </div>
     <div class="subh rv"><h3>영상</h3><span class="note">2026 산업AI EXPO 시연영상</span></div>
     <div class="vids">
-      <div class="glass vid rv"><video controls preload="metadata" playsinline poster="media/poster-full.jpg" src="media/demo-full.mp4"></video><h3>AIFF 시연영상 · 맞춤형 입지분석</h3><p>5분 58초</p></div>
-      <div class="glass vid rv"><video controls preload="metadata" playsinline poster="media/poster-profit.jpg" src="media/demo-profit.mp4"></video><h3>AIFF 수지분석편 · 얼마에 사야 남을까</h3><p>5분</p></div>
+      <div class="glass vid rv"><video controls preload="none" playsinline poster="media/poster-full.jpg" src="media/demo-full.mp4"></video><h3>AIFF 시연영상 · 맞춤형 입지분석</h3><p>5분 58초</p></div>
+      <div class="glass vid rv"><video controls preload="none" playsinline poster="media/poster-profit.jpg" src="media/demo-profit.mp4"></video><h3>AIFF 수지분석편 · 얼마에 사야 남을까</h3><p>5분</p></div>
     </div>
   </div>
 </section>
@@ -1191,7 +1191,7 @@ body.fx-cursor .cursorlight.on{opacity:1}
 <section class="contact" id="contact">
   <div class="halo" aria-hidden="true"></div>
   <div class="wrap">
-    <img src="media/logo.png" alt="KFI 한국금융투자" style="height:clamp(44px,6vw,62px);width:auto;margin:0 auto 34px;position:relative">
+    <img src="media/logo.webp" alt="KFI 한국금융투자" style="height:clamp(44px,6vw,62px);width:auto;margin:0 auto 34px;position:relative">
     <h2>복잡한 계산은 <span class="grad">AI</span>가,<br>결정은 당신이.</h2>
     <p class="lead" style="margin-inline:auto;position:relative">주거자산 가치평가의 새로운 기준, 함께 만들어 갈 파트너를 기다립니다.</p>
     <div class="mail"><span class="addr">Bu.ko@kfi.ai.kr</span><button class="btn pri" id="copy" type="button">주소 복사</button><a class="btn gold" href="http://www.kfi.finance" target="_blank" rel="noopener">분석 시스템 <span class="ext">↗</span></a></div>
@@ -1210,7 +1210,7 @@ body.fx-cursor .cursorlight.on{opacity:1}
 </main>
 <footer><div class="wrap">
   <div class="ftop">
-    <div><img src="media/logo.png" alt="KFI 한국금융투자" style="height:30px;width:auto"><p style="margin-top:14px;max-width:34ch;color:var(--muted)">데이터와 AI로, 모든 집의 가치를 투명하게.</p><p style="margin-top:10px">제휴·문의 Bu.ko@kfi.ai.kr</p></div>
+    <div><img src="media/logo.webp" alt="KFI 한국금융투자" style="height:30px;width:auto"><p style="margin-top:14px;max-width:34ch;color:var(--muted)">데이터와 AI로, 모든 집의 가치를 투명하게.</p><p style="margin-top:10px">제휴·문의 Bu.ko@kfi.ai.kr</p></div>
     <div><h4>COMPANY</h4><ul><li><a href="#vision">비전·미션</a></li><li><a href="#company">조직·연혁</a></li><li><a href="#media">미디어룸</a></li></ul></div>
     <div><h4>TECHNOLOGY</h4><ul><li><a href="#tech">핵심 기술</a></li><li><a href="#engine">AIFF 엔진</a></li><li><a href="#tour">미리보기</a></li><li><a href="#engine">이용 방법</a></li></ul></div>
     <div><h4>SERVICE</h4><ul><li><a href="http://www.kfi.finance" target="_blank" rel="noopener">AIFF 분석 시스템 ↗</a></li><li><a href="#faq">자주 묻는 질문</a></li><li><a href="#contact">문의하기</a></li></ul></div>
@@ -1271,6 +1271,15 @@ document.documentElement.lang='ko';
 const $=s=>document.querySelector(s);
 const RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
 let sample=null;
+/* sections below the fold skip rendering until needed; before any in-page jump, lay everything out once so positions are exact */
+const cvPrime=()=>{if(cvPrime.d)return;cvPrime.d=1;const h=document.documentElement;h.classList.add('cvoff');void document.body.offsetHeight;requestAnimationFrame(()=>requestAnimationFrame(()=>h.classList.remove('cvoff')))};
+const jump=(t,smooth)=>{cvPrime();t.scrollIntoView({behavior:smooth&&!RM?'smooth':'instant'});
+ const fix=()=>{const want=parseFloat(getComputedStyle(t).scrollMarginTop)||0;if(Math.abs(t.getBoundingClientRect().top-want)>4)t.scrollIntoView({behavior:'instant'})};
+ if(smooth&&!RM&&'onscrollend' in window)addEventListener('scrollend',()=>setTimeout(fix,60),{once:true});else setTimeout(fix,smooth&&!RM?900:120)};
+document.addEventListener('click',e=>{const a=e.target.closest&&e.target.closest('a[href^="#"]');if(!a||e.defaultPrevented)return;const id=decodeURIComponent(a.getAttribute('href').slice(1)),t=id&&document.getElementById(id);if(!t)return;
+ e.preventDefault();jump(t,true);if(location.hash!=='#'+id)history.pushState(null,'','#'+id)},true);
+if(location.hash.length>1){const t=document.getElementById(decodeURIComponent(location.hash.slice(1)));if(t)addEventListener('load',()=>requestAnimationFrame(()=>jump(t,false)))}
+addEventListener('load',()=>setTimeout(()=>(window.requestIdleCallback||(f=>f()))(cvPrime,{timeout:4000}),3000));
 
 /* nav + reveal + spotlight */
 const nav=$('#nav');const ns=()=>nav.classList.toggle('solid',scrollY>30);ns();addEventListener('scroll',ns,{passive:true});
@@ -1283,7 +1292,7 @@ document.addEventListener('pointermove',e=>{const c=e.target.closest&&e.target.c
 /* ---------- HERO particle morph ---------- */
 {
 const cv=$('#hero'),cx=cv.getContext('2d');let W=0,Hh=0;
-const N=innerWidth<700?900:1600;
+const N=innerWidth<700?700:1100;
 const rnd=(a,b)=>a+Math.random()*(b-a);
 function sphere(){const a=[];const g=Math.PI*(3-Math.sqrt(5));for(let i=0;i<N;i++){const y=1-(i/(N-1))*2,r=Math.sqrt(1-y*y),t=g*i;a.push([Math.cos(t)*r*.95,y*.95,Math.sin(t)*r*.95])}return a}
 function city(){const B=[];for(let i=-3;i<=3;i++)for(let j=-3;j<=3;j++){if(Math.random()<.12)continue;const d=Math.hypot(i,j);B.push({x:i*.24,z:j*.24,h:rnd(.25,1.15)*(1.25-d*.12),w:rnd(.07,.1)})}
@@ -1293,18 +1302,18 @@ function wave(){const a=[];const n=Math.ceil(Math.sqrt(N));for(let k=0;k<N;k++){
 function text(){const o=document.createElement('canvas');o.width=400;o.height=200;const c=o.getContext('2d');c.fillStyle='#fff';c.font='900 150px Sora, Arial, sans-serif';c.textAlign='center';c.textBaseline='middle';c.fillText('KFI',200,104);
  const d=c.getImageData(0,0,400,200).data,pts=[];for(let y=0;y<200;y+=3)for(let x=0;x<400;x+=3)if(d[(y*400+x)*4+3]>128)pts.push([(x-200)/190,(y-100)/190,0]);
  const a=[];for(let k=0;k<N;k++){const p=pts[Math.floor(Math.random()*pts.length)];a.push([p[0]+rnd(-.006,.006),p[1]+rnd(-.006,.006),rnd(-.04,.04)])}return a}
-const SH=[sphere(),city(),wave(),text()];const FLAT=[0,0,0,1];
+const SH=[sphere(),null,null,null],MK=[sphere,city,wave,text],sh=i=>SH[i]||(SH[i]=MK[i]());(window.requestIdleCallback||(f=>setTimeout(f,600)))(()=>{sh(1);sh(2);sh(3)});const FLAT=[0,0,0,1];
 const P=SH[0].map(t=>({x:rnd(-2,2),y:rnd(-2,2),z:rnd(-2,2),d:Math.random()*.8,hue:Math.random()}));
 let shape=0,flat=0,ang=0,changed=performance.now();
 const sprites=['224,166,0','61,107,255','123,92,255','27,35,112'].map(c=>{const s=document.createElement('canvas');s.width=s.height=32;const g=s.getContext('2d');const gr=g.createRadialGradient(16,16,0,16,16,16);gr.addColorStop(0,`rgba(${c},1)`);gr.addColorStop(.25,`rgba(${c},.55)`);gr.addColorStop(1,`rgba(${c},0)`);g.fillStyle=gr;g.fillRect(0,0,32,32);return s});
-function size(){const r=cv.getBoundingClientRect(),dpr=Math.min(devicePixelRatio||1,2);W=r.width;Hh=r.height;cv.width=W*dpr;cv.height=Hh*dpr;cx.setTransform(dpr,0,0,dpr,0,0)}
+function size(){const r=cv.getBoundingClientRect(),dpr=Math.min(devicePixelRatio||1,1.5);W=r.width;Hh=r.height;cv.width=W*dpr;cv.height=Hh*dpr;cx.setTransform(dpr,0,0,dpr,0,0)}
 size();addEventListener('resize',()=>{clearTimeout(size.t);size.t=setTimeout(size,150)});
 const caps=[...document.querySelectorAll('#cap button')];let hold=4.8;
 function setShape(s,now){shape=s;changed=performance.now();caps.forEach((c,i)=>{c.classList.toggle('on',i===s);c.setAttribute('aria-pressed',i===s)});P.forEach(p=>p.d=now?Math.random()*.08:Math.random()*.5);hold=now?12:4.8}
-caps.forEach((c,i)=>c.addEventListener('click',()=>{setShape(i,true);if(RM){P.forEach((p,j)=>{const t=SH[i][j];p.x=t[0];p.y=t[1];p.z=t[2]});flat=FLAT[i];frame(performance.now())}}));
+caps.forEach((c,i)=>c.addEventListener('click',()=>{setShape(i,true);if(RM){P.forEach((p,j)=>{const t=sh(i)[j];p.x=t[0];p.y=t[1];p.z=t[2]});flat=FLAT[i];frame(performance.now())}}));
 let mx=0,my=0;cv.parentElement.addEventListener('pointermove',e=>{const r=cv.getBoundingClientRect();mx=(e.clientX-r.left)/r.width-.5;my=(e.clientY-r.top)/r.height-.5},{passive:true});
 let visible=true;if('IntersectionObserver' in window)new IntersectionObserver(es=>{visible=es[0].isIntersecting;if(visible&&!RM)requestAnimationFrame(frame)}).observe(cv);
-function frame(now){const tg=SH[shape],el=(now-changed)/1000;
+function frame(now){const tg=sh(shape),el=(now-changed)/1000;
  flat+=(FLAT[shape]-flat)*.04;ang+=.0035*(1-flat);
  const rx=(-.32+my*.3)*(1-flat),ry=(ang+mx*.6)*(1-flat);const cr=Math.cos(ry),sr=Math.sin(ry),cq=Math.cos(rx),sq=Math.sin(rx);
  const S=Math.min(W,Hh)*.36,ox=W/2,oy=Hh/2;
@@ -1320,7 +1329,7 @@ function frame(now){const tg=SH[shape],el=(now-changed)/1000;
  cx.globalAlpha=1;cx.globalCompositeOperation='source-over';
  if(!RM&&el>hold)setShape((shape+1)%4);
  if(!RM&&visible)requestAnimationFrame(frame)}
-if(RM){setShape(3);P.forEach((p,i)=>{const t=SH[3][i];p.x=t[0];p.y=t[1];p.z=t[2]});flat=1;frame(performance.now())}else requestAnimationFrame(frame);
+if(RM){setShape(3);P.forEach((p,i)=>{const t=sh(3)[i];p.x=t[0];p.y=t[1];p.z=t[2]});flat=1;frame(performance.now())}else requestAnimationFrame(frame);
 }
 
 /* marquee */
@@ -1415,7 +1424,7 @@ const TOUR=[
   b.innerHTML=`<span class="n">0${i+1}</span><b>${t.t}</b><span class="bar"></span>`;b.onclick=()=>{user=true;sel(i)};
   b.onkeydown=e=>{if(/Right|Down/.test(e.key)){e.preventDefault();user=true;sel((i+1)%5,1)}if(/Left|Up/.test(e.key)){e.preventDefault();user=true;sel((i+4)%5,1)}};L.appendChild(b)});
  function sel(i,f){cur=i;t0=performance.now();tm.forEach(clearTimeout);tm=[];
-  TOUR.forEach((_,j)=>{const b=$('#tt'+j);b.setAttribute('aria-selected',j===i);b.tabIndex=j===i?0:-1;b.querySelector('.bar').style.width='0'});
+  TOUR.forEach((_,j)=>{const b=$('#tt'+j);b.setAttribute('aria-selected',j===i);b.tabIndex=j===i?0:-1;b.querySelector('.bar').style.transform='scaleX(0)'});
   const tb=$('#tt'+i);if(f)tb.focus();if(L.scrollWidth>L.clientWidth)L.scrollTo({left:tb.offsetLeft-16,behavior:RM?'auto':'smooth'});
   const t=TOUR[i];$('#tpath').textContent='/ '+t.p;$('#tdone').lastChild.textContent=t.done;$('#tstep').textContent=`0${i+1} / 05`;$('#tttl').textContent=t.t;$('#tdesc').textContent=t.d;$('#tout').textContent='→ '+t.o;
   [cA,cB,fo].forEach(e=>e.classList.remove('on'));cam.classList.remove('go');I.classList.add('out');
@@ -1424,7 +1433,7 @@ const TOUR=[
    cA.innerHTML=card(t.A);cB.innerHTML=card(t.B);I.classList.remove('out');void cam.offsetWidth;
    if(!RM)cam.classList.add('go');tm.push(setTimeout(()=>fo.classList.add('on'),RM?0:700),setTimeout(()=>cA.classList.add('on'),RM?0:1100),setTimeout(()=>cB.classList.add('on'),RM?0:1500))},RM?0:280))}
  let vis=true;if('IntersectionObserver' in window)new IntersectionObserver(es=>{vis=es[0].isIntersecting},{threshold:.25}).observe($('#tview'));
- function tick(now){const k=Math.min(1,(now-t0)/DUR);$('#tt'+cur+' .bar').style.width=k*100+'%';
+ function tick(now){const k=Math.min(1,(now-t0)/DUR);if(vis||k>=1)$('#tt'+cur+' .bar').style.transform=`scaleX(${k})`;
   if(k>=1&&!user&&vis&&!RM)sel((cur+1)%5);raf=requestAnimationFrame(tick)}
  sel(0);raf=requestAnimationFrame(tick)}
 {const lb=document.createElement('div');lb.className='lbox';lb.hidden=true;lb.setAttribute('role','dialog');lb.setAttribute('aria-label','분석 화면 크게 보기');lb.innerHTML='<img alt=""><button type="button" aria-label="닫기">×</button>';document.body.appendChild(lb);
@@ -1478,7 +1487,7 @@ function note(t){const d=document.createElement('div');d.className='msg act';d.t
 function setSugg(list){const s=$('#sugg');s.innerHTML='';(list||[]).slice(0,3).forEach(q=>{const b=document.createElement('button');b.type='button';b.className='chip';b.textContent=q;b.onclick=()=>ask(q);s.appendChild(b)})}
 function goBtn(sec){if(!sec||!document.getElementById(sec))return'';return `<button type="button" class="gob" data-go="${sec}">${SECS[sec]||'해당 섹션'}으로 이동 →</button>`}
 msgs.addEventListener('click',e=>{const b=e.target.closest('[data-go]');if(b){goSection(b.dataset.go)}});
-function goSection(sec){const el=document.getElementById(sec);if(!el)return false;el.scrollIntoView({behavior:RM?'auto':'smooth'});if(innerWidth<700)closeChat();return true}
+function goSection(sec){const el=document.getElementById(sec);if(!el)return false;cvPrime();el.scrollIntoView({behavior:RM?'auto':'smooth'});if(innerWidth<700)closeChat();return true}
 function welcome(){msgs.innerHTML='';turns=[];bubble(md('안녕하세요! **AIFF AI 상담**이에요.\nKFI와 AIFF에 대해 묻거나, 원하는 섹션으로 안내해 드리고, 문의 작성도 도와드려요.'),'ai',true);setSugg(STARTERS)}
 function openChat(q){chat.hidden=false;fab.setAttribute('aria-expanded','true');if(q)ask(q);else cin.focus()}
 function closeChat(){chat.hidden=true;fab.setAttribute('aria-expanded','false')}
